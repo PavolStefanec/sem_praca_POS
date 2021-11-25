@@ -1,6 +1,6 @@
 #include <iostream>
-
-int main() {
+#include <SDL.h>
+int main(int argc, char* args[]) {
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
