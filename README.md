@@ -1,2 +1,2 @@
 # sem_praca_POS
-clovece nehnevaj sa
+clovece nehnevaj saaaa
