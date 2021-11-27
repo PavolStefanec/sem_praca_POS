@@ -1,3 +1,3 @@
-C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/cmake-build-debug/CMakeFiles/untitled.dir
-C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS/cmake-build-debug/CMakeFiles/untitled.dir
+D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS/cmake-build-debug/CMakeFiles/rebuild_cache.dir

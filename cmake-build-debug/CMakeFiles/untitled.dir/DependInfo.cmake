@@ -8,13 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/main.cpp" "C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/cmake-build-debug/CMakeFiles/untitled.dir/main.cpp.obj"
+  "D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS/main.cpp" "D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS/cmake-build-debug/CMakeFiles/untitled.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../SDL/include"
+  "C:/libs/SDL/include"
   )
 
 # The set of dependency files which are needed:

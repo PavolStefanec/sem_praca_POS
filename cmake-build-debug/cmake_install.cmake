@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS
+# Install script for directory: D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/FRIcka/5. Semester/Principy Operacnych Systemov/sem_praca_POS/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

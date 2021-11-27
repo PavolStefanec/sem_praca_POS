@@ -42,10 +42,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS
+CMAKE_SOURCE_DIR = "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug
+CMAKE_BINARY_DIR = "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles\untitled.dir\depend.make
@@ -57,21 +57,21 @@ include CMakeFiles\untitled.dir\flags.make
 
 CMakeFiles\untitled.dir\main.cpp.obj: CMakeFiles\untitled.dir\flags.make
 CMakeFiles\untitled.dir\main.cpp.obj: ..\main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled.dir/main.cpp.obj"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\untitled.dir\main.cpp.obj /FdCMakeFiles\untitled.dir\ /FS -c C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled.dir/main.cpp.obj"
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\untitled.dir\main.cpp.obj /FdCMakeFiles\untitled.dir\ /FS -c "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\main.cpp"
 <<
 
 CMakeFiles\untitled.dir\main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/main.cpp.i"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe > CMakeFiles\untitled.dir\main.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\main.cpp
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe > CMakeFiles\untitled.dir\main.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\main.cpp"
 <<
 
 CMakeFiles\untitled.dir\main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/main.cpp.s"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\untitled.dir\main.cpp.s /c C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\main.cpp
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\untitled.dir\main.cpp.s /c "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\main.cpp"
 <<
 
 # Object files for target untitled
@@ -84,9 +84,9 @@ untitled_EXTERNAL_OBJECTS =
 untitled.exe: CMakeFiles\untitled.dir\main.cpp.obj
 untitled.exe: CMakeFiles\untitled.dir\build.make
 untitled.exe: CMakeFiles\untitled.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable untitled.exe"
-	"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\untitled.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\mt.exe --manifests -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\untitled.dir\objects1.rsp @<<
- /out:untitled.exe /implib:untitled.lib /pdb:C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug\untitled.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console   -LIBPATH:C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\SDL\lib\x86  SDL2main.lib SDL2.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable untitled.exe"
+	"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\untitled.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\mt.exe --manifests -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\untitled.dir\objects1.rsp @<<
+ /out:untitled.exe /implib:untitled.lib /pdb:"D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug\untitled.pdb" /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console   -LIBPATH:C:\libs\SDL\lib\x86  SDL2main.lib SDL2.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
 
 # Rule to build all files generated by this target.
@@ -98,6 +98,6 @@ CMakeFiles\untitled.dir\clean:
 .PHONY : CMakeFiles\untitled.dir\clean
 
 CMakeFiles\untitled.dir\depend:
-	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug C:\Users\miska\Documents\Data\ProgramovacieJazyky\C\C++\PrincipyOperacnychSystemov\SemestralnaPraca2021\sem_praca_POS\cmake-build-debug\CMakeFiles\untitled.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS" "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS" "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug" "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug" "D:\FRIcka\5. Semester\Principy Operacnych Systemov\sem_praca_POS\cmake-build-debug\CMakeFiles\untitled.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles\untitled.dir\depend
 
