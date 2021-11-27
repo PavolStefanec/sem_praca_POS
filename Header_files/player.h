@@ -1,3 +1,4 @@
+#pragma once
 #ifndef UNTITLED_PLAYER_H
 #define UNTITLED_PLAYER_H
 
@@ -9,7 +10,7 @@ using namespace std;
 class Player
 {
 private:
-    Piece* gamePiece[NUMBER_OF_PIECE];
+    Piece* gamePiece[NUMBER_OF_PIECES];
     bool activePlayer;
 public:
     Player();

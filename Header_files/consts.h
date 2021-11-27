@@ -1,7 +1,4 @@
-//
-// Created by miska on 27. 11. 2021.
-//
-
+#pragma once
 #ifndef UNTITLED_CONSTS_H
 #define UNTITLED_CONSTS_H
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef UNTITLED_GAMEPIECE_H
 #define UNTITLED_GAMEPIECE_H
 
