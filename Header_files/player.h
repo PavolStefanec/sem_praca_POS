@@ -1,5 +1,4 @@
-#ifndef UNTITLED_PLAYER_H
-#define UNTITLED_PLAYER_H
+#pragma once
 
 #include "consts.h"
 #include "piece.h"
@@ -17,6 +16,3 @@ public:
     bool getActivePlayer();
     void setActivePlayer(bool pActivePlayer);
 };
-#endif //UNTITLED_PLAYER_H
-
-

@@ -1,6 +1,4 @@
-#ifndef UNTITLED_GAMEPIECE_H
-#define UNTITLED_GAMEPIECE_H
-
+#pragma once
 
 class Piece
 {
@@ -12,5 +10,3 @@ public:
     bool getIsHome();
     void setIsHome(bool pIsHome);
 };
-
-#endif //UNTITLED_GAMEPIECE_H
