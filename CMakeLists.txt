@@ -7,6 +7,6 @@ set(SDL2_LIB_DIR C:/libs/SDL/lib/x86)
 
 include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIB_DIR})
-add_executable(ludo main.cpp Header_files/piece.h Source_files/piece.cpp)
+add_executable(ludo main.cpp Header_files/piece.h Source_files/piece.cpp Header_files/communication/server.h Source_files/communication/server.cpp Source_files/communication/client.cpp Header_files/communication/client.h)
 
 target_link_libraries(${PROJECT_NAME} SDL2main SDL2)
