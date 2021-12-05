@@ -10,21 +10,28 @@ private:
     int numberOfPlayers;
     Field* homeFields[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_MAX_PLAYERS];
     Field* endFields[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_MAX_PLAYERS];
-    Field* startFields[NUMBER_OF_MAX_PLAYERS];
     Field* normalFields[NUMBER_OF_GANE_FIELDS];
+
+    //functions
+
+    Piece* getRemovedPieceNormal(int position);
+    void setPieceNormal(Piece* piece, int position);
 public:
     Board(int numberOfPlayer);
     ~Board();
 
-    bool setPieceHome(Piece* piece, int idPlayer);
-    bool setPieceStart(Piece* piece, int idPlayer);
-    bool setPieceEnd(Piece* piece, int idPlayer);
-    bool setPieceNormal(Piece* piece, int position);
+    Piece* setNormal(Piece* piece, int position);
+    void setHome(Piece* piece);
+    void setPieceHome(Piece* piece, int position);
+    void setEnd(Piece* piece, int position);
 
-    Piece* getPieceHome(int idPlayer, int position);
-    Piece* getPieceStart(int idPlayer);
-    Piece* getPieceEnd(int idPlayer, int position);
-    Piece* getPieceNormal(int position);
+    bool equalsIdPlayerStart(Piece* piece);
+    bool equalsIdPlayerNormal(Piece* piece, int numberOfMove);
+    bool isEndOccupied(int idPlayer, int position);
+
+    void leavePieceHome(Piece* piece);
+    void leavePieceEnd(Piece* piece);
+    void leavePieceNormal(Piece* piece);
 };
 #endif //UNTITLED_BOARD_H
 
