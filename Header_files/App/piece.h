@@ -11,9 +11,10 @@ private:
     int startFieldPosition;
     int goEndFieldPosition;
     int position;
+    int numberOfPiece;
 
 public:
-    Piece(int pIdPlayer, int pStartFieldPosition);
+    Piece(int pIdPlayer, int pStartFieldPosition, int pNumberOfPiece);
     ~Piece();
 
     int getIdPlayer();
@@ -21,6 +22,7 @@ public:
     int getStartFieldPosition();
     int getGoEndFieldPosition();
     int getPosition();
+    int getNumberOfPiece();
 
     void setType(Type pType);
     void setPosition(int pPosition);

@@ -9,10 +9,16 @@ private:
     int numberOfPlayers;
     Board* board;
     Piece* pieces[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_MAX_PLAYERS];
-    Player* players[NUMBER_OF_MAX_PLAYERS];
+    //Player* players[NUMBER_OF_MAX_PLAYERS];
+    int activeIdPlayer;
+
+    //moved piece
     Type newTypeOfPiece;
     int newPositionOfPiece;
+
+    //removed piece
     int idPlayerOfRemovedPiece;
+    int numberOfRemovedPiece;
     int newPositionOfRemovedPiece;
 
     //functions
@@ -26,18 +32,23 @@ private:
     void resetInfoPiece();
     void setInfoRemovedPiece(Piece* removedPiece);
     void setInfoMovedPiece(Piece* piece);
+
+    void start();
 public:
     Game(int pNumberOfPlayers);
     ~Game();
-    void start();
-    bool move(int idPlayer, int piecePosition, int numberOfMove);
+
+    void setActiveIdPlayer(int idPlayer);
+    bool move(int piecePosition, int numberOfMove);
     bool isEnd(int idPlayer);
 
     bool wasRemovedPiece();
 
+    Type getNewTypeOfPiece();
     int getNewPositionOfPiece();
     int getIdPlayerOfRemovedPiece();
     int getNewPositionOfRemovedPiece();
+    int getNumberOfRemovedPiece();
 
 
 };

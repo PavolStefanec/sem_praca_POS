@@ -6,24 +6,34 @@
 #include <SDL_timer.h>
 #include <stdio.h>
 #include "../consts.h"
+#define WIDTH 800
+#define HEIGHT 800
+#define PIECE_WIDTH 40
+#define PIECE_HEIGHT 40
 
 class GraphicsSystem {
 private:
     SDL_Window* win = nullptr;
-    SDL_Renderer* rend = nullptr;
-    SDL_Surface* surface = nullptr;
-    SDL_Texture* tex = nullptr;
-    // struct to hold the position and size of the sprite
-    SDL_Rect dest;
+    SDL_Renderer* renderer = nullptr;
+    SDL_Texture* board = nullptr;
+    SDL_Texture* pieces[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_PIECES];
+    SDL_Rect textureBoard;
+    SDL_Rect texturePieces[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_PIECES];
+
+    bool work = true;
+    int numberOfPlayers;
 
 public:
-    GraphicsSystem();
+    GraphicsSystem(int pNumberOfPlayers, char* imageBoard, char* imagePieces[]);
     ~GraphicsSystem();
-    void inicialization();
+    void initialization();
     void createsWindow();
     void setUpGraphicsHardware();
-    void loadImage();
+    void loadImageBoard(char* path);
+    void loadImagePieces(char* paths[]);
     void clearWindow();
-    void drawImage();
+    void drawImages();
+    void setTexturePiece(int idPlayer, int piece, int x, int y);
+    void listenEvent(int& position);
 };
 #endif //UNTITLED_GRAPHICSSYSTEM_H

@@ -10,7 +10,7 @@ private:
     Piece* piece;
     Type type;
 public:
-    Field(Type pType = normal);
+    Field(Type pType);
     ~Field();
     void setPiece(Piece* pPiece);
     Piece* getPiece();

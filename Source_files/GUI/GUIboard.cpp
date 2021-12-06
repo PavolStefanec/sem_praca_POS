@@ -5,22 +5,29 @@ GUIBoard::GUIBoard(string fileName) {
     InputFile* reader = new InputFile();
     successReading = reader->openFile(fileName);
     if (successReading) {
+        reader->nextLine();
         for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
             for (int j = 0; j < NUMBER_OF_PIECES; j++) {
                 reader->nextLine();
-                homeGUIFields[i][j] = new GUIField(stoi(reader->readWord()),stoi(reader->readWord()));
+                string word1 = reader->readWord();
+                string word2 = reader->readWord();
+                homeGUIFields[i][j] = new GUIField(stoi(word1),stoi(word2));
             }
         }
         for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
             for (int j = 0; j < NUMBER_OF_PIECES; j++) {
                 reader->nextLine();
-                endGUIFields[i][j] = new GUIField(stoi(reader->readWord()), stoi(reader->readWord()));
+                string word1 = reader->readWord();
+                string word2 = reader->readWord();
+                endGUIFields[i][j] = new GUIField(stoi(word1), stoi(word2));
             }
         }
 
         for (int i = 0; i < NUMBER_OF_GANE_FIELDS; i++) {
             reader->nextLine();
-            normalGUIFields[i] = new GUIField(stoi(reader->readWord()), stoi(reader->readWord()));
+            string word1 = reader->readWord();
+            string word2 = reader->readWord();
+            normalGUIFields[i] = new GUIField(stoi(word1), stoi(word2));
         }
         reader->closeFile();
     }
