@@ -5,7 +5,6 @@ class GUIPiece {
 private:
     int x;
     int y;
-
 public:
     GUIPiece(int pX, int pY);
     ~GUIPiece();

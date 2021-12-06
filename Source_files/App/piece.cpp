@@ -1,11 +1,12 @@
 #include "../../Header_files/App/piece.h"
 
-Piece::Piece(int pIdPlayer, int pStartFieldPosition) {
+Piece::Piece(int pIdPlayer, int pStartFieldPosition, int pNumberOfPiece) {
     position = -1;
     idPlayer = pIdPlayer;
     startFieldPosition = pStartFieldPosition;
     type = none;
     goEndFieldPosition = pStartFieldPosition == 0 ? NUMBER_OF_GANE_FIELDS - 1 : pStartFieldPosition - 1;
+    numberOfPiece = pNumberOfPiece;
 }
 Piece::~Piece(){}
 
@@ -29,6 +30,10 @@ int Piece::getPosition() {
     return position;
 }
 
+int Piece::getNumberOfPiece() {
+    return numberOfPiece;
+}
+
 void Piece::setType(Type pType) {
     type = pType;
 }
@@ -36,4 +41,6 @@ void Piece::setType(Type pType) {
 void Piece::setPosition(int pPosition) {
     position = pPosition;
 }
+
+
 

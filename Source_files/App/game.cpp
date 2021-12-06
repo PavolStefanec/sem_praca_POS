@@ -4,22 +4,24 @@
 
 Game::Game(int pNumberOfPlayers){
     numberOfPlayers = pNumberOfPlayers;
+    activeIdPlayer = -1;
     resetInfoPiece();
-    for (int i = 0; i < numberOfPlayers; i++) {
-        players[i] = new Player(i + 1);
-    }
+//    for (int i = 0; i < numberOfPlayers; i++) {
+//        players[i] = new Player(i + 1);
+//    }
     for (int i = 0; i < numberOfPlayers; i++) {
         for (int j = 0; j < NUMBER_OF_PIECES; j++) {
-            pieces[i][j] = new Piece(i + 1,i * FIELDS_BEWTWEEN_TWO_STARTS);
+            pieces[i][j] = new Piece(i + 1,i * FIELDS_BEWTWEEN_TWO_STARTS, j);
         }
     }
     board = new Board(numberOfPlayers);
+    start();
 }
 
 Game::~Game() {
-    for (int i = 0; i < numberOfPlayers; i++) {
-        delete players[i];
-    }
+//    for (int i = 0; i < numberOfPlayers; i++) {
+//        delete players[i];
+//    }
     //figurky mazem v board
     delete board;
 }
@@ -32,9 +34,14 @@ void Game::start() {
     }
 }
 
-bool Game::move(int idPlayer, int piecePosition, int numberOfMove) {
+void Game::setActiveIdPlayer(int idPlayer) {
+    activeIdPlayer = idPlayer;
+}
+
+
+bool Game::move(int piecePosition, int numberOfMove) {
     resetInfoPiece();
-    Piece* piece = pieces[idPlayer-1][piecePosition];
+    Piece* piece = pieces[activeIdPlayer-1][piecePosition];
     switch (piece->getType()) {
         case home:
             return moveHomeStart(piece, numberOfMove);
@@ -43,7 +50,7 @@ bool Game::move(int idPlayer, int piecePosition, int numberOfMove) {
         case end:
             return moveEndEnd(piece,numberOfMove);
     }
-
+    return false;
 }
 
 bool Game::isEnd(int idPlayer) {
@@ -151,11 +158,13 @@ void Game::resetInfoPiece() {
     newPositionOfPiece = -1;
     idPlayerOfRemovedPiece = -1;
     newPositionOfRemovedPiece = -1;
+    numberOfRemovedPiece = -1;
 }
 
 void Game::setInfoRemovedPiece(Piece* removedPiece) {
     idPlayerOfRemovedPiece = removedPiece->getIdPlayer();
     newPositionOfRemovedPiece = removedPiece->getPosition();
+    numberOfRemovedPiece = removedPiece->getNumberOfPiece();
 }
 
 void Game::setInfoMovedPiece(Piece *piece) {
@@ -180,6 +189,15 @@ int Game::getIdPlayerOfRemovedPiece() {
 int Game::getNewPositionOfRemovedPiece() {
     return newPositionOfRemovedPiece;
 }
+
+Type Game::getNewTypeOfPiece() {
+    return newTypeOfPiece;
+}
+
+int Game::getNumberOfRemovedPiece() {
+    return numberOfRemovedPiece;
+}
+
 
 
 

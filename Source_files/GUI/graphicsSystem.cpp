@@ -1,26 +1,35 @@
 #include "../../Header_files/GUI/graphicsSystem.h"
 
-GraphicsSystem::GraphicsSystem() {
-    try {
-        inicialization();
-        createsWindow();
-        setUpGraphicsHardware();
-    } catch(...) {
-
-    }
+GraphicsSystem::GraphicsSystem(int pNumberOfPlayers, char* imageBoard, char* imagePieces[]) {
+    numberOfPlayers = pNumberOfPlayers;
+    initialization();
+    createsWindow();
+    setUpGraphicsHardware();
+    loadImageBoard(imageBoard);
+    loadImagePieces(imagePieces);
+    clearWindow();
 }
 
 GraphicsSystem::~GraphicsSystem() {
-    if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0) {
-        if (tex != nullptr && tex) {
-            SDL_DestroyTexture(tex);
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+        //vycisti panacikov
+        for (int i = 0; i < numberOfPlayers; i++) {
+            for (int j = 0; j < NUMBER_OF_PIECES; j++) {
+                if (pieces[i][j]) {
+                    SDL_DestroyTexture(pieces[i][j]);
+                }
+            }
         }
-        if (rend != nullptr && rend) {
-            //okno
-            SDL_DestroyRenderer(rend);
+        //vycisti hraciu dosku
+        if (board) {
+            SDL_DestroyTexture(board);
         }
-        if (win != nullptr && win) {
-            //graficky hardware
+
+        if (renderer) {
+            SDL_DestroyRenderer(renderer);
+        }
+
+        if ( win) {
             SDL_DestroyWindow(win);
         }
         //unicializacia
@@ -30,55 +39,117 @@ GraphicsSystem::~GraphicsSystem() {
 }
 
 
-void GraphicsSystem::inicialization() {
+void GraphicsSystem::initialization() {
     //inicializacia
-    if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
-        throw SDL_GetError();
+        printf(SDL_GetError());
+        work = false;
     }
 }
 
 
 void GraphicsSystem::createsWindow() {
-    win = SDL_CreateWindow("Clovece, nehnevaj sa",
-                                       SDL_WINDOWPOS_CENTERED,
-                                       SDL_WINDOWPOS_CENTERED,
-                                       800, 800, 0);
-    if (!win)
-    {
-        throw SDL_GetError();
+    if (work) {
+        win = SDL_CreateWindow("Clovece, nehnevaj sa",
+                               SDL_WINDOWPOS_CENTERED,
+                               SDL_WINDOWPOS_CENTERED,
+                               WIDTH, HEIGHT, 0);
+        if (!win) {
+            printf(SDL_GetError());
+            work = false;
+        }
     }
 }
 
 void GraphicsSystem::setUpGraphicsHardware() {
-    Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-    rend = SDL_CreateRenderer(win, -1, render_flags);
-    if (!rend)
-    {
-        throw SDL_GetError();
+    if (work) {
+        Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+        renderer = SDL_CreateRenderer(win, -1, render_flags);
+        if (!renderer) {
+            printf(SDL_GetError());
+            work = false;
+        }
     }
 }
 
-void GraphicsSystem::loadImage()
+void GraphicsSystem::loadImageBoard(char* path)
 {
-    surface = IMG_Load("C:\\Users\\miska\\Documents\\Data\\ProgramovacieJazyky\\C\\C++\\PrincipyOperacnychSystemov\\SemestralnaPraca2021\\sem_praca_POS\\Images\\gameBoard.png");
-    if (!surface) {
-        printf("IMG_Load: %s\n", IMG_GetError());
+    if (work) {
+        board = IMG_LoadTexture(renderer, path);
+        if (!board) {
+            printf(SDL_GetError());
+            work = false;
+        }
+        int w, h;
+        //SDL_QueryTexture(board, NULL, NULL,&w, &h);
+        textureBoard.w = WIDTH;
+        textureBoard.h = HEIGHT;
+        textureBoard.x = 0;
+        textureBoard.y = 0;
     }
+}
 
-    tex = SDL_CreateTextureFromSurface(rend, surface);
-    SDL_FreeSurface(surface);
-    if (!tex)
-    {
-        //throw printf(SDL_GetError());
+void GraphicsSystem::loadImagePieces(char* paths[])
+{
+    if (work) {
+        for (int i = 0; i < numberOfPlayers; i++) {
+            for (int j = 0; j < NUMBER_OF_PIECES; j++) {
+                pieces[i][j] = IMG_LoadTexture(renderer, paths[i]);
+                if (!pieces[i][j]) {
+                    printf(SDL_GetError());
+                    work = false;
+                }
+                //int w,h;
+                //SDL_QueryTexture(board, NULL, NULL,&w, &h);
+                texturePieces[i][j].w = PIECE_WIDTH;
+                texturePieces[i][j].h = PIECE_HEIGHT;
+                texturePieces[i][j].x = 0;
+                texturePieces[i][j].y = 0;
+            }
+        }
     }
 }
 
 void GraphicsSystem::clearWindow() {
-    SDL_RenderClear(rend);
+    if (work) {
+        SDL_RenderClear(renderer);
+    }
 }
 
-void GraphicsSystem::drawImage() {
-    SDL_RenderCopy(rend, tex, NULL, NULL);
-    SDL_RenderPresent(rend);
+void GraphicsSystem::drawImages() {
+    if (work) {
+        SDL_RenderCopy(renderer, board, NULL, &textureBoard);
+        for (int i = 0; i < numberOfPlayers; i++) {
+            for (int j = 0; j < NUMBER_OF_PIECES; j++) {
+                SDL_RenderCopy(renderer, pieces[i][j], NULL, &texturePieces[i][j]);
+            }
+        }
+        SDL_RenderPresent(renderer);
+    }
+}
+
+void GraphicsSystem::setTexturePiece(int idPlayer, int piece, int x, int y) {
+    texturePieces[idPlayer - 1][piece].x = x;
+    texturePieces[idPlayer - 1][piece].y = y;
+}
+
+void GraphicsSystem::listenEvent(int& position) {
+    // event handling
+    SDL_Event e;
+    while (true) {
+        if (SDL_PollEvent(&e)) {
+            if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT) {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
+                (&position)[0] = x;
+                (&position)[1] = y;
+                return;
+            } else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_RSHIFT) {
+                (&position)[0] = -1;
+                (&position)[1] = -1;
+                return;
+            }
+        }
+    }
 }
