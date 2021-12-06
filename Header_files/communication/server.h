@@ -14,13 +14,14 @@ private:
     WSADATA wsData;
     WORD ver;
     SOCKET listening;
+    int port;
 
 
 public:
     Server();
     void initWinSock();
     void createSocket();
-    void bindSocket();
+    void bindSocket(int parPort);
     void startListening();
     void closeSocket(SOCKET parSocket);
     ~Server();

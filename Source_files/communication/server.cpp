@@ -5,7 +5,6 @@
 #include "../../Header_files/communication/server.h"
 
 Server::Server() {
-
 }
 
 void Server::initWinSock() {
@@ -13,38 +12,50 @@ void Server::initWinSock() {
 
     int wsOK = WSAStartup(ver, &wsData);
     if (wsOK != 0) {
-        std::cerr << "Error" << std::endl;
+        std::cout << "WSA failed to initialize" << std::endl;
         return;
     }
+    std::cout << "WSA successfully initialized" << std::endl;
 }
 
 void Server::createSocket() {
     listening = socket(AF_INET, SOCK_STREAM, 0);
     if (listening == INVALID_SOCKET) {
-        std::cerr << "Can not create socket" << std::endl;
+        std::cout << "cannot open socket, error " << WSAGetLastError() << std::endl;
         return;
     }
+    std::cout << "socket successfully opened" << std::endl;
 }
 
-void Server::bindSocket() {
+void Server::bindSocket(int parPort) {
+    port = parPort;
     sockaddr_in hint;
     hint.sin_family = AF_INET;
-    hint.sin_port = htons(54000);
+    hint.sin_port = htons(port);
     hint.sin_addr.S_un.S_addr = INADDR_ANY;
 
-    bind(listening, (sockaddr*)&hint, sizeof(hint));
+    int bindResult = bind(listening, (sockaddr*)&hint, sizeof(hint));
+    if (bindResult != 0) {
+        std::cout << "port binding failed" << std::endl;
+        return;
+    }
+    std::cout << "port binding succeeded" << std::endl;
 }
 
 void Server::startListening() {
-    listen(listening, SOMAXCONN);
-
+    int lResult = listen(listening, SOMAXCONN);
+    if (lResult != 0) {
+        std::cout << "failed to start listening on port " << port << std::endl;
+        return;
+    }
+    std::cout << "started listening on port " << port << std::endl;
 
     sockaddr_in client;
     int clientSize = sizeof(client);
 
     SOCKET clientSocket = accept(listening, (sockaddr*)& client, &clientSize);
     if (clientSocket == INVALID_SOCKET) {
-        std::cerr << "Error" << std::endl;
+        std::cout << "client socket is invalid" << std::endl;
         return;
     }
 
@@ -70,13 +81,13 @@ void Server::startListening() {
 
         int bytesReceived = recv(clientSocket, buf, 4096, 0);
         if (bytesReceived == SOCKET_ERROR) {
-            std::cerr << "error in recv() " << std::endl;
+            std::cout << "error in function recv() " << std::endl;
 
             break;
         }
 
         if (bytesReceived == 0) {
-            std::cout << "client disconneted" << std::endl;
+            std::cout << "client disconnected" << std::endl;
             break;
         }
 
@@ -93,5 +104,6 @@ void Server::closeSocket(SOCKET parSocket) {
 }
 
 Server::~Server() {
+    closesocket(listening);
     WSACleanup();
 }

@@ -12,8 +12,8 @@
 
 class Client {
 private:
-    std::string ipAddress; // server IP address
-    int port;   // listening port on the server
+    std::string ipAddress;
+    int port;
     WSAData data;
     WORD ver;
     SOCKET sock;
@@ -23,7 +23,7 @@ public:
     Client();
     void initWinSock();
     void createSocket();
-    void connectToServer();
+    void connectToServer(std::string parIP, int parPort);
     ~Client();
 };
 
