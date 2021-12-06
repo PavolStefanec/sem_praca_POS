@@ -1,11 +1,13 @@
 #ifndef UNTITLED_GUIPIECE_H
 #define UNTITLED_GUIPIECE_H
+#include "../consts.h"
 class GUIPiece {
 private:
-    double x;
-    double y;
+    int x;
+    int y;
+
 public:
-    GUIPiece(double pX, double pY);
+    GUIPiece(int pX, int pY);
     ~GUIPiece();
 
 

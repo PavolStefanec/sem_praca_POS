@@ -6,7 +6,9 @@ Field::Field(Type pType) {
 }
 
 Field::~Field() {
-    delete piece;
+    if (piece != nullptr) {
+        delete piece;
+    }
 }
 
 void Field::setPiece(Piece *pPiece) {

@@ -24,7 +24,6 @@ GraphicsSystem::~GraphicsSystem() {
             SDL_DestroyWindow(win);
         }
         //unicializacia
-        IMG_Quit();
         SDL_Quit();
     }
 
@@ -44,7 +43,7 @@ void GraphicsSystem::createsWindow() {
     win = SDL_CreateWindow("Clovece, nehnevaj sa",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       1200, 1200, 0);
+                                       800, 800, 0);
     if (!win)
     {
         throw SDL_GetError();
@@ -62,9 +61,7 @@ void GraphicsSystem::setUpGraphicsHardware() {
 
 void GraphicsSystem::loadImage()
 {
-
-    IMG_Init(IMG_INIT_PNG);
-    surface = IMG_Load("C:/Users/miska/Documents/Data/ProgramovacieJazyky/C/C++/PrincipyOperacnychSystemov/SemestralnaPraca2021/sem_praca_POS/Images/green.png");
+    surface = IMG_Load("C:\\Users\\miska\\Documents\\Data\\ProgramovacieJazyky\\C\\C++\\PrincipyOperacnychSystemov\\SemestralnaPraca2021\\sem_praca_POS\\Images\\gameBoard.png");
     if (!surface) {
         printf("IMG_Load: %s\n", IMG_GetError());
     }

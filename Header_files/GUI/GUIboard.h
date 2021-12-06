@@ -10,7 +10,6 @@ private:
     bool successReading;
     GUIField* homeGUIFields[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_MAX_PLAYERS];
     GUIField* endGUIFields[NUMBER_OF_MAX_PLAYERS][NUMBER_OF_MAX_PLAYERS];
-    GUIField* startGUIFields[NUMBER_OF_MAX_PLAYERS];
     GUIField* normalGUIFields[NUMBER_OF_GANE_FIELDS];
 public:
     GUIBoard(string fileName);
@@ -18,8 +17,6 @@ public:
 
     int getHomeGUIFieldsX(int idPlayer, int position);
     int getHomeGUIFieldsY(int idPlayer, int position);
-    int getStartGUIFieldsX(int idPlayer);
-    int getStartGUIFieldsY(int idPlayer);
     int getEndGUIFieldsX(int idPlayer, int position);
     int getEndGUIFieldsY(int idPlayer, int position);
     int getNormalGUIFieldsX(int position);

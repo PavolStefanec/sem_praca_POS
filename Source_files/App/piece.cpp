@@ -1,8 +1,11 @@
 #include "../../Header_files/App/piece.h"
 
-Piece::Piece(int pIdPlayer) {
+Piece::Piece(int pIdPlayer, int pStartFieldPosition) {
+    position = -1;
     idPlayer = pIdPlayer;
-    type = home;
+    startFieldPosition = pStartFieldPosition;
+    type = none;
+    goEndFieldPosition = pStartFieldPosition == 0 ? NUMBER_OF_GANE_FIELDS - 1 : pStartFieldPosition - 1;
 }
 Piece::~Piece(){}
 
@@ -14,12 +17,16 @@ Type Piece::getType() {
     return type;
 }
 
-int Piece::getPosition() {
-    return position;
+int Piece::getStartFieldPosition() {
+    return startFieldPosition;
 }
 
-void Piece::setIdPlayer(int pIdPlayer) {
-    idPlayer = pIdPlayer;
+int Piece::getGoEndFieldPosition() {
+    return goEndFieldPosition;
+}
+
+int Piece::getPosition() {
+    return position;
 }
 
 void Piece::setType(Type pType) {
@@ -29,3 +36,4 @@ void Piece::setType(Type pType) {
 void Piece::setPosition(int pPosition) {
     position = pPosition;
 }
+

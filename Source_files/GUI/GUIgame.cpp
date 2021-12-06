@@ -21,3 +21,16 @@ GUIGame::~GUIGame() {
     delete guiBoard;
 }
 
+bool GUIGame::controlClick(int x, int y) {
+    return false;
+}
+
+int GUIGame::getPiecePosition(int idPlayer) {
+    for (int i = 0; i < NUMBER_OF_PIECES; i++) {
+        if (controlClick(guiPieces[idPlayer - 1][i]->getX(), guiPieces[idPlayer - 1][i]->getY())) {
+            return i;
+        };
+    }
+    return -1;
+}
+

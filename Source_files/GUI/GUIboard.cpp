@@ -8,17 +8,9 @@ GUIBoard::GUIBoard(string fileName) {
         for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
             for (int j = 0; j < NUMBER_OF_PIECES; j++) {
                 reader->nextLine();
-                int x = stoi(reader->readWord());
-                int y = stoi(reader->readWord());
-                homeGUIFields[i][j] = new GUIField(x,y);
+                homeGUIFields[i][j] = new GUIField(stoi(reader->readWord()),stoi(reader->readWord()));
             }
         }
-
-        for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
-            reader->nextLine();
-            startGUIFields[i] = new GUIField(stoi(reader->readWord()), stoi(reader->readWord()));
-        }
-
         for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
             for (int j = 0; j < NUMBER_OF_PIECES; j++) {
                 reader->nextLine();
@@ -41,7 +33,6 @@ GUIBoard::~GUIBoard() {
             delete homeGUIFields[i][j];
             delete endGUIFields[i][j];
         }
-        delete startGUIFields[i];
     }
 
     for (int i = 0; i < NUMBER_OF_GANE_FIELDS; i++) {
@@ -55,14 +46,6 @@ int GUIBoard::getHomeGUIFieldsX(int idPlayer, int position) {
 
 int GUIBoard::getHomeGUIFieldsY(int idPlayer, int position) {
     return homeGUIFields[idPlayer - 1][position]->getY();
-}
-
-int GUIBoard::getStartGUIFieldsX(int idPlayer) {
-    return startGUIFields[idPlayer - 1]->getX();
-}
-
-int GUIBoard::getStartGUIFieldsY(int idPlayer) {
-    return startGUIFields[idPlayer - 1]->getY();
 }
 
 int GUIBoard::getEndGUIFieldsX(int idPlayer, int position) {
@@ -80,4 +63,5 @@ int GUIBoard::getNormalGUIFieldsX(int position) {
 int GUIBoard::getNormalGUIFieldsY(int position) {
     return normalGUIFields[position]->getY();
 }
+
 

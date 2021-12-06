@@ -1,6 +1,6 @@
 #include "../../Header_files/GUI/GUIpiece.h"
 
-GUIPiece::GUIPiece(double pX, double pY) {
+GUIPiece::GUIPiece(int pX, int pY) {
     x = pX;
     y = pY;
 }
