@@ -53,6 +53,45 @@ int main(int argc, char* args[]) {
         }
         guiGame->redrawWindow();
     }
+    piece = guiGame->clickEvent();
+    if (piece != -1) {
+        game->move(piece, 6);
+        guiGame->setMovedPiece(game->getNewTypeOfPiece(),game->getNewPositionOfPiece());
+        if (game->wasRemovedPiece()) {
+            guiGame->setRemovedPiece(game->getIdPlayerOfRemovedPiece(), game->getNumberOfRemovedPiece(), game->getNewPositionOfRemovedPiece());
+        }
+        guiGame->redrawWindow();
+    }
+    piece = guiGame->clickEvent();
+    if (piece != -1) {
+        game->move(piece, 20);
+        guiGame->setMovedPiece(game->getNewTypeOfPiece(),game->getNewPositionOfPiece());
+        if (game->wasRemovedPiece()) {
+            guiGame->setRemovedPiece(game->getIdPlayerOfRemovedPiece(), game->getNumberOfRemovedPiece(), game->getNewPositionOfRemovedPiece());
+        }
+        guiGame->redrawWindow();
+    }
+    piece = guiGame->clickEvent();
+    if (piece != -1) {
+        game->move(piece, 18);
+        guiGame->setMovedPiece(game->getNewTypeOfPiece(),game->getNewPositionOfPiece());
+        if (game->wasRemovedPiece()) {
+            guiGame->setRemovedPiece(game->getIdPlayerOfRemovedPiece(), game->getNumberOfRemovedPiece(), game->getNewPositionOfRemovedPiece());
+        }
+        guiGame->redrawWindow();
+    }
+    piece = guiGame->clickEvent();
+    if (piece != -1) {
+        //if condition important!
+        if (game->move(piece, 3)) {
+            guiGame->setMovedPiece(game->getNewTypeOfPiece(), game->getNewPositionOfPiece());
+            if (game->wasRemovedPiece()) {
+                guiGame->setRemovedPiece(game->getIdPlayerOfRemovedPiece(), game->getNumberOfRemovedPiece(),
+                                         game->getNewPositionOfRemovedPiece());
+            }
+            guiGame->redrawWindow();
+        }
+    }
     while(true){}
     delete guiGame;
     delete game;
