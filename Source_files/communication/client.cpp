@@ -5,9 +5,7 @@
 #include "../../Header_files/communication/client.h"
 
 Client::Client() {
-}
-
-void Client::initWinSock() {
+    // initialize WinSock
     ver = MAKEWORD(2, 2);
     int wsResult = WSAStartup(ver, &data);
     if (wsResult != 0) {
@@ -15,9 +13,8 @@ void Client::initWinSock() {
         return;
     }
     std::cout << "wsa successfully initialized" << std::endl;
-}
 
-void Client::createSocket() {
+    // create socket
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == INVALID_SOCKET) {
         std::cout << "cannot open socket, error " << WSAGetLastError() << std::endl;

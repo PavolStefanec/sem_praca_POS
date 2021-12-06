@@ -5,20 +5,17 @@
 #include "../../Header_files/communication/server.h"
 
 Server::Server() {
-}
-
-void Server::initWinSock() {
+    // initialize WinSock
     ver = MAKEWORD(2, 2);
-
     int wsOK = WSAStartup(ver, &wsData);
     if (wsOK != 0) {
         std::cout << "WSA failed to initialize" << std::endl;
         return;
     }
     std::cout << "WSA successfully initialized" << std::endl;
-}
 
-void Server::createSocket() {
+
+    // create socket
     listening = socket(AF_INET, SOCK_STREAM, 0);
     if (listening == INVALID_SOCKET) {
         std::cout << "cannot open socket, error " << WSAGetLastError() << std::endl;
@@ -104,6 +101,5 @@ void Server::closeSocket(SOCKET parSocket) {
 }
 
 Server::~Server() {
-    closesocket(listening);
     WSACleanup();
 }

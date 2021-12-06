@@ -19,8 +19,6 @@ private:
 
 public:
     Server();
-    void initWinSock();
-    void createSocket();
     void bindSocket(int parPort);
     void startListening();
     void closeSocket(SOCKET parSocket);

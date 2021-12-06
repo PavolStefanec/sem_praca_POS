@@ -21,8 +21,6 @@ private:
 
 public:
     Client();
-    void initWinSock();
-    void createSocket();
     void connectToServer(std::string parIP, int parPort);
     ~Client();
 };
