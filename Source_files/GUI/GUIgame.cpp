@@ -68,11 +68,11 @@ void GUIGame::setMovedPiece(Type newType, int newPosition) {
 void GUIGame::setRemovedPiece(int idPlayer, int numberOfPiece, int newPosition) {
     int x,y;
     x = guiBoard->getHomeGUIFieldsX(idPlayer, newPosition);
-    y = guiBoard->getEndGUIFieldsY(idPlayer, newPosition);
+    y = guiBoard->getHomeGUIFieldsY(idPlayer, newPosition);
 
     guiPieces[idPlayer - 1][numberOfPiece]->setX(x);
     guiPieces[idPlayer - 1][numberOfPiece]->setY(y);
-    graphicsSystem->setTexturePiece(idPlayer - 1,numberOfPiece,x,y);
+    graphicsSystem->setTexturePiece(idPlayer,numberOfPiece,x,y);
 }
 
 void GUIGame::setActiveIdPlayer(int pIdPlayer) {
