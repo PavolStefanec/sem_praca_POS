@@ -1,6 +1,4 @@
-#pragrma once
-#ifndef UNTITLED_BOARD_H
-#define UNTITLED_BOARD_H
+#pragma once
 #include "piece.h"
 #include "consts.h"
 
@@ -12,4 +10,3 @@ public:
     ~Board();
 
 };
-#endif //UNTITLED_BOARD_H
