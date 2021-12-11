@@ -7,6 +7,7 @@ Piece::Piece(int pIdPlayer, int pStartFieldPosition, int pNumberOfPiece) {
     type = none;
     goEndFieldPosition = pStartFieldPosition == 0 ? NUMBER_OF_GANE_FIELDS - 1 : pStartFieldPosition - 1;
     numberOfPiece = pNumberOfPiece;
+    color = COLOR_NUMBER + idPlayer - 1;
 }
 Piece::~Piece(){}
 
@@ -40,6 +41,10 @@ void Piece::setType(Type pType) {
 
 void Piece::setPosition(int pPosition) {
     position = pPosition;
+}
+
+int Piece::getColor() {
+    return color;
 }
 
 
