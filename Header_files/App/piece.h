@@ -8,6 +8,7 @@ class Piece
 private:
     int idPlayer;
     Type type;
+    int color;
     int startFieldPosition;
     int goEndFieldPosition;
     int position;
@@ -23,6 +24,7 @@ public:
     int getGoEndFieldPosition();
     int getPosition();
     int getNumberOfPiece();
+    int getColor();
 
     void setType(Type pType);
     void setPosition(int pPosition);

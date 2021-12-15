@@ -25,6 +25,13 @@ public:
     void setPieceHome(Piece* piece, int position);
     void setEnd(Piece* piece, int position);
 
+    int getHomeFieldColor(int idPlayer, int position);
+    int getHomeFieldNumber(int idPlayer, int position);
+    int getEndFieldColor(int idPlayer, int position);
+    int getEndFieldNumber(int idPlayer, int position);
+    int getNormalFieldColor(int position);
+    int getNormalFieldNumber(int position);
+
     bool equalsIdPlayerStart(Piece* piece);
     bool equalsIdPlayerNormal(Piece* piece, int numberOfMove);
     bool isEndOccupied(int idPlayer, int position);

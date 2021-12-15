@@ -6,20 +6,29 @@
 Board::Board(int pNumberOfPlayers) {
     numberOfPlayers = pNumberOfPlayers;
 
-    for (int i = 0; i < numberOfPlayers; i++) {
+    for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
         for (int j  = 0; j < NUMBER_OF_PIECES; j++) {
-            homeFields[i][j] = new Field(home);
-            endFields[i][j] = new Field(end);
+            homeFields[i][j] = new Field(home, COLOR_NUMBER + i);
+            endFields[i][j] = new Field(end, COLOR_NUMBER + i);
         }
     }
 
     for (int i = 0; i < NUMBER_OF_GANE_FIELDS; i++) {
-        normalFields[i] = new Field(normal);
+        int color = 1;
+        if (i == 0)
+            color = COLOR_NUMBER;
+        else if (i == 10)
+            color = COLOR_NUMBER + 1;
+        else if (i == 20)
+            color = COLOR_NUMBER + 2;
+        else if (i == 30)
+            color = COLOR_NUMBER + 3;
+        normalFields[i] = new Field(normal, color);
     }
 }
 
 Board::~Board() {
-    for (int i = 0; i < numberOfPlayers; i++) {
+    for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
         for (int j  = 0; j < NUMBER_OF_PIECES; j++) {
             delete homeFields[i][j];
             delete endFields[i][j];
@@ -110,4 +119,28 @@ void Board::setPieceNormal(Piece* piece, int position) {
     //nadstav info vo figurke
     piece->setType(normal);
     piece->setPosition(position);
+}
+
+int Board::getHomeFieldColor(int idPlayer, int position) {
+    return homeFields[idPlayer-1][position]->getColor();
+}
+
+int Board::getHomeFieldNumber(int idPlayer, int position) {
+    return homeFields[idPlayer-1][position]->getNumber();
+}
+
+int Board::getEndFieldColor(int idPlayer, int position) {
+    return endFields[idPlayer-1][position]->getColor();
+}
+
+int Board::getEndFieldNumber(int idPlayer, int position) {
+    return endFields[idPlayer-1][position]->getNumber();
+}
+
+int Board::getNormalFieldColor(int position) {
+    return normalFields[position]->getColor();
+}
+
+int Board::getNormalFieldNumber(int position) {
+    return normalFields[position]->getNumber();
 }
