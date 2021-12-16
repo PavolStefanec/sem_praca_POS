@@ -36,7 +36,7 @@ void Client::connectToServer() {
 
     printf("Please enter a message: ");
     bzero(buffer,256);
-    fgets(buffer, 255, stdin); 7
+    fgets(buffer, 255, stdin);
 
     n = write(sockfd, buffer, strlen(buffer));
     if (n < 0)

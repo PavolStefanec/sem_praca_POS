@@ -14,7 +14,6 @@ Server::Server(int parPort) {
     } else {
         perror("Socket successfully created");
     }
-
 }
 
 void Server::bindSocket() {
