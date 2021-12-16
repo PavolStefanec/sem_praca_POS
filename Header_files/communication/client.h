@@ -7,6 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <iostream>
+#include "../console.h"
 
 class Client {
 private:
@@ -19,7 +20,7 @@ private:
 
     int idPlayer;
     int numberOfPlayers;
-
+    Console* game;
 
 public:
     Client(char* name, int port);

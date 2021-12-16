@@ -83,6 +83,8 @@ void Client::connectingToGame() {
         printf("Cakaj na ostatnych hracov a zaciatok hry!\n");
 
         closeSocket();
+        //vytvorenie hry hraca
+        game = new Console(numberOfPlayers);
     }
 
 }
@@ -97,6 +99,7 @@ void Client::closeSocket() {
 }
 
 Client::~Client() {
+    delete game;
 }
 
 
