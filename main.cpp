@@ -4,8 +4,8 @@
 #include "Header_files/communication/server.h"
 #include <stdio.h>
 #include <stdio.h>
-#include <iostream>
-#include "Header_files/console.h"
+//#include <iostream>
+//#include "Header_files/console.h"
 
 using namespace std;
 
@@ -31,13 +31,14 @@ int main(int argc, char* args[]) {
 //    client->connectingToGame();
 //    delete client;
 //TEST SERVER
-//    Server* server = new Server(9999,2);
-//    server->creatingSocket();
-//    server->binding();
-//    server->connectPlayerToGame();
-//    printf("START game!\n");
-//    //ide Pajova cast komunikacie a vlakien...
-//    server->closeSocket();
-//    delete server;
+
+    Server* server = new Server(9999,2);
+    server->creatingSocket();
+    server->binding();
+    server->connectPlayerToGame();
+    printf("START game!\n");
+    //ide Pajova cast komunikacie a vlakien...
+    server->closeSocket();
+    delete server;
     return 0;
 }
