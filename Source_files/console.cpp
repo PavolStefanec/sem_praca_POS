@@ -13,7 +13,8 @@ void Console::start() {
     game->start();
 }
 
-int Console::getNumberOfPiece() {
+int Console::getNumberOfPiece(int value) {
+    cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Hodil si číslo: \033[0m"<< value <<endl;
     cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Stlač číslo figúrky 1-4 a 0, ak chceš svoj ťah preskočiť! \033[0m"<<endl;
     cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Číslo figúrky: \033[0m";
     int pieceNumber;

@@ -26,7 +26,7 @@ public:
     Console(int numberOfPlayer);
     ~Console();
     void setActivePlayer(int idPlayer);
-    int getNumberOfPiece();
+    int getNumberOfPiece(int value);
     void start();
     bool isEnd();
     void drawBoard();

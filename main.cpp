@@ -40,7 +40,7 @@ int main(int argc, char* args[]) {
                     (char *) &serv_addr.sin_addr.s_addr,
                     server->h_length
             );
-            serv_addr.sin_port = htons(9998);
+            serv_addr.sin_port = htons(9999);
 
             sockfd = socket(AF_INET, SOCK_STREAM, 0);
             if (sockfd < 0) {
@@ -81,6 +81,7 @@ int main(int argc, char* args[]) {
                 printf("Tvoje cislo hraca: %d\n", idPlayer);
                 game = new Console(numberOfPlayers);
                 game->start();
+                game->drawBoard();
             } else {
                 bzero(buffer, 256);
                 n = read(sockfd, buffer, 255);
@@ -96,9 +97,10 @@ int main(int argc, char* args[]) {
                     game->setActivePlayer(activePlayer);
                     if (activePlayer == idPlayer) {
                         //si na tahu
-                        int figure = game->getNumberOfPiece();
+                        int value = atoi(&buffer[2]);
+                        int figure = game->getNumberOfPiece(value);
                         if (figure > 0 && figure < 5)
-                            game->move(atoi(&buffer[2]), figure);
+                            game->move(value, figure);
                         else
                             figure = 0;
                         game->drawBoard();
@@ -122,7 +124,7 @@ int main(int argc, char* args[]) {
                         int number = atoi(&buffer[4]);
                         if (figure != 0) {
                             game->setActivePlayer(activePlayer);
-                            game->move(numberOfPlayers, figure);
+                            game->move(number, figure);
                             game->drawBoard();
                             if (game->isEnd()) {
                                 cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
