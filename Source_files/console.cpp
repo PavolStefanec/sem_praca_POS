@@ -21,7 +21,7 @@ int Console::getNumberOfPiece() {
     cout << endl;
     if (pieceNumber == 0)
         cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Preskakuješ ťah! \033[0m"<<endl;
-    if (position < 0 || position > 5) {
+    if (pieceNumber < 0 || pieceNumber > 5) {
         cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Zvolené figúrka neexistuje! \033[0m"<<endl;
     }
     return pieceNumber;

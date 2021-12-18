@@ -40,7 +40,7 @@ int main(int argc, char* args[]) {
                     (char *) &serv_addr.sin_addr.s_addr,
                     server->h_length
             );
-            serv_addr.sin_port = htons(9999);
+            serv_addr.sin_port = htons(9998);
 
             sockfd = socket(AF_INET, SOCK_STREAM, 0);
             if (sockfd < 0) {
@@ -69,13 +69,13 @@ int main(int argc, char* args[]) {
                 std::cout << "Pripajanie do hry..." << std::endl;
                 bzero(buffer, 256);
                 n = read(sockfd, buffer, 255);
-                if (n != 0) {
+                if (n < 0) {
                     perror("Error reading from socket");
                     close(sockfd);
                     break;
                 }
-                numberOfPlayers = atoi(reinterpret_cast<const char *>(buffer[0]));
-                idPlayer = atoi(reinterpret_cast<const char *>(buffer[1]));
+                numberOfPlayers = std::atoi(&buffer[0]);
+                idPlayer = std::atoi(&buffer[2]);
                 printf("Si v hre!\n");
                 std::cout << "Celkovy pocet hracov v hre: " << numberOfPlayers << std::endl;
                 printf("Tvoje cislo hraca: %d\n", idPlayer);
@@ -84,12 +84,12 @@ int main(int argc, char* args[]) {
             } else {
                 bzero(buffer, 256);
                 n = read(sockfd, buffer, 255);
-                if (n != 0) {
+                if (n < 0) {
                     perror("Error reading from socket");
                     close(sockfd);
                     break;
                 }
-                int activePlayer = atoi(reinterpret_cast<const char *>(buffer[0]));
+                int activePlayer = atoi(&buffer[0]);
                 if (activePlayer == 0) {
                     printf("Hra sa este nezacala!\n");
                 } else {
@@ -98,26 +98,28 @@ int main(int argc, char* args[]) {
                         //si na tahu
                         int figure = game->getNumberOfPiece();
                         if (figure > 0 && figure < 5)
-                            game->move(atoi(reinterpret_cast<const char *>(buffer[1])), figure);
+                            game->move(atoi(&buffer[2]), figure);
                         else
                             figure = 0;
-                        const char *figureCH = std::to_string(figure).c_str();
+                        game->drawBoard();
+                        int isWinner = 0;
+                        if (game->isEnd()) {
+                            cout << "\033[1;" << COLOR_NUMBER + activePlayer - 1
+                                 << "m GRATULUJEME! Vyhral si!: \033[0m";
+                            gameIsPlaying = false;
+                            isWinner = 1;
+                        }
+                        const char *figureCH = (std::to_string(figure) + "/" + std::to_string(isWinner)).c_str();
                         n = write(sockfd, figureCH, strlen(figureCH) + 1);
                         if (n < 0) {
                             perror("Error writing to socket");
                             close(sockfd);
                             break;
                         }
-                        game->drawBoard();
-                        if (game->isEnd()) {
-                            cout << "\033[1;" << COLOR_NUMBER + activePlayer - 1
-                                 << "m GRATULUJEME! Vyhral si!: \033[0m";
-                            gameIsPlaying = false;
-                        }
                     } else {
                         //update
-                        int figure = atoi(reinterpret_cast<const char *>(buffer[1]));
-                        int number = atoi(reinterpret_cast<const char *>(buffer[2]));
+                        int figure = atoi(&buffer[2]);
+                        int number = atoi(&buffer[4]);
                         if (figure != 0) {
                             game->setActivePlayer(activePlayer);
                             game->move(numberOfPlayers, figure);
@@ -137,7 +139,7 @@ int main(int argc, char* args[]) {
             }
             close(sockfd);
         }
-        sleep(0.25);
+        sleep(1);
     }
     if (game)
         delete game;
