@@ -31,6 +31,6 @@ public:
     bool isEnd();
     void drawBoard();
     void clear();
-    void move(int number, int figure);
+    void move(int number, int position);
 };
 

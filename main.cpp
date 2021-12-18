@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Header_files/console.h"
 
+
 using namespace std;
 
 int main(int argc, char* args[]) {
@@ -16,12 +17,11 @@ int main(int argc, char* args[]) {
     int n;
     struct sockaddr_in serv_addr;
     struct hostent* server;
-    bool open;
     char buffer[256];
 
     int idPlayer = 0;
     int numberOfPlayers = 0;
-    Console* game;
+    Console* game = nullptr;
     bool connected;
     bool gameIsPlaying = true;
     while(gameIsPlaying) {
@@ -58,7 +58,7 @@ int main(int argc, char* args[]) {
 
         if (connected) {
             const char *idPlayerCh = std::to_string(idPlayer).c_str();
-            n = write(sockfd, idPlayerCh, strlen(idPlayerCh));
+            n = write(sockfd, idPlayerCh, strlen(idPlayerCh) + 1);
             if (n < 0) {
                 perror("Error writing to socket");
                 close(sockfd);
@@ -102,7 +102,7 @@ int main(int argc, char* args[]) {
                         else
                             figure = 0;
                         const char *figureCH = std::to_string(figure).c_str();
-                        n = write(sockfd, figureCH, strlen(figureCH));
+                        n = write(sockfd, figureCH, strlen(figureCH) + 1);
                         if (n < 0) {
                             perror("Error writing to socket");
                             close(sockfd);
@@ -134,11 +134,12 @@ int main(int argc, char* args[]) {
                         }
                     }
                 }
-
             }
             close(sockfd);
         }
         sleep(0.25);
     }
+    if (game)
+        delete game;
     return 0;
 }
