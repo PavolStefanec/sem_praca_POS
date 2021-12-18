@@ -99,7 +99,10 @@ int main() {
     int n;
     char buffer[256];
     int pocetHracov = 2;
-    bool updatedAll[pocetHracov];
+    bool updates[pocetHracov];
+    for (int i = 0; i < pocetHracov; i++) {
+        updates[i] = false;
+    }
     int lastPlayerId = 0;
 
     bzero((char*)&serv_addr, sizeof(serv_addr));
@@ -119,7 +122,7 @@ int main() {
     ////threads
     pthread_t hrac;
 
-    DATA data = {1, 0, 0, 0, pocetHracov, false, 0, 0, buffer, updatedAll, &mutex};
+    DATA data = {1, 0, 0, 0, pocetHracov, false, 0, 0, buffer, updates, &mutex};
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -210,12 +213,14 @@ int main() {
                     }
                 }
             }
-        } //todo zatvorka tu strajkuje
+        }
     }
+    close(newsockfd);
+    close(sockfd);
 
-    pthread_mutex_destroy(&mutex);
     pthread_cond_destroy(&jeHodene);
     pthread_cond_destroy(&jeOdohrane);
+    pthread_mutex_destroy(&mutex);
 
     return 0;
 }
