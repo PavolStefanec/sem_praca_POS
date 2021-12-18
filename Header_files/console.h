@@ -1,3 +1,4 @@
+#pragma once
 #include "App/game.h"
 #include <iostream>
 
@@ -26,9 +27,10 @@ public:
     ~Console();
     void setActivePlayer(int idPlayer);
     int getNumberOfPiece();
-    void start(int numberOfPlayer);
+    void start();
+    bool isEnd();
     void drawBoard();
     void clear();
-    void move(int number);
+    void move(int number, int figure);
 };
 

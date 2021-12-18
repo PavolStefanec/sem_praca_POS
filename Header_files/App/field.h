@@ -1,6 +1,4 @@
 #pragma once
-#ifndef UNTITLED_FIELD_H
-#define UNTITLED_FIELD_H
 #include "piece.h"
 #include "../consts.h"
 
@@ -18,4 +16,3 @@ public:
     int getColor();
     int getNumber();
 };
-#endif //UNTITLED_FIELD_H

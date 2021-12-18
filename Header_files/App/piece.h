@@ -1,8 +1,5 @@
 #pragma once
-#ifndef UNTITLED_GAMEPIECE_H
-#define UNTITLED_GAMEPIECE_H
-#include "player.h"
-
+#include "../consts.h"
 class Piece
 {
 private:
@@ -29,5 +26,3 @@ public:
     void setType(Type pType);
     void setPosition(int pPosition);
 };
-
-#endif //UNTITLED_GAMEPIECE_H

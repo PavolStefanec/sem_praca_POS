@@ -52,9 +52,9 @@ bool Game::move(int piecePosition, int numberOfMove) {
     return false;
 }
 
-bool Game::isEnd(int idPlayer) {
+bool Game::isEnd() {
     for (int i = 0; i < NUMBER_OF_PIECES; i++) {
-        if (!board->isEndOccupied(idPlayer,i)) {
+        if (!board->isEndOccupied(activeIdPlayer,i)) {
             return false;
         }
     }

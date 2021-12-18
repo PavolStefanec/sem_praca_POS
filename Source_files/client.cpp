@@ -1,4 +1,4 @@
-#include "../../Header_files/communication/client.h"
+#include "../Header_files/client.h"
 
 Client::Client(char* name, int port) {
     open = true;

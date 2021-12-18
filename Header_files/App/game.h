@@ -1,6 +1,5 @@
-#include "../consts.h"
+#pragma once
 #include "board.h"
-#include "player.h"
 
 class Game {
 private:
@@ -41,7 +40,7 @@ public:
     void setActiveIdPlayer(int idPlayer);
     int getActiveIdPlayer();
     bool move(int piecePosition, int numberOfMove);
-    bool isEnd(int idPlayer);
+    bool isEnd();
     int getHomeFieldColor(int idPlayer, int position);
     int getHomeFieldNumber(int idPlayer, int position);
     int getEndFieldColor(int idPlayer, int position);

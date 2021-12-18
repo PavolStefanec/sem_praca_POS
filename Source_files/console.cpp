@@ -9,15 +9,21 @@ Console::~Console() {
     delete game;
 }
 
-void Console::start(int numberOfPlayer) {
+void Console::start() {
     game->start();
 }
 
 int Console::getNumberOfPiece() {
+    cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Stlač číslo figúrky 1-4 a 0, ak chceš svoj ťah preskočiť! \033[0m"<<endl;
     cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Číslo figúrky: \033[0m";
     int pieceNumber;
     cin >> pieceNumber;
     cout << endl;
+    if (pieceNumber == 0)
+        cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Preskakuješ ťah! \033[0m"<<endl;
+    if (position < 0 || position > 5) {
+        cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Zvolené figúrka neexistuje! \033[0m"<<endl;
+    }
     return pieceNumber;
 }
 
@@ -129,14 +135,11 @@ void Console::setActivePlayer(int idPlayer) {
     game->setActiveIdPlayer(idPlayer);
 }
 
-void Console::move(int number) {
-    int position = getNumberOfPiece();
-    if (position > 0 && position < 5) {
-        game->move(position -1, number);
-    } else {
-        cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Zvolené figúrka neexistuje! \033[0m"<<endl;
-    }
-    drawBoard();
+void Console::move(int number, int position) {
+    game->move(position -1, number);
 }
 
 
+bool Console::isEnd() {
+    return game->isEnd();
+}
