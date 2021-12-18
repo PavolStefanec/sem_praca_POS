@@ -29,17 +29,18 @@ void* update(void* parData) {
 
     int n = -1;
     int counter = 0;
-    const char *message = (std::to_string(data->jeNaTahu) + std::to_string(data->posuvaSaPanak)
-                           + std::to_string(data->poslednyHod)).c_str();
-    while (n != 0) {
+    const char *message;
+    message = (std::to_string(data->jeNaTahu) + "/" + std::to_string(data->posuvaSaPanak) + "/"
+               + std::to_string(data->poslednyHod)).c_str();
+    while (n < 0) {
         counter++;
         if (counter > 5) {
             std::cerr << "player is not responding" << std::endl;
             break;
         }
-        pthead_mutex_lock(data->mutex);
+        pthread_mutex_lock(data->mutex);
         n = write(data->socket, message, strlen(message) + 1);
-        if (n != 0) {
+        if (n < 0) {
             perror("error writing to socket");
             sleep(static_cast<unsigned long>(0.25));
         } else
@@ -54,30 +55,29 @@ void* tah(void *parData) {
 
     int n = -1;
     int counter = 0;
-    pthead_mutex_lock(data->mutex);
+    pthread_mutex_lock(data->mutex);
     data->poslednyHod = 1 + rand() % 6;
-    const char* message = data->jeNaTahu + "" + ::to_string(data->poslednyHod).c_str();
-    while (n != 0) {
+    const char* message = (std::to_string(data->jeNaTahu) + "/" + std::to_string(data->poslednyHod)).c_str();
+    while (n < 0) {
         counter++;
         if (counter > 5) {
             std::cerr << "player is not responding" << std::endl;
             break;
         }
         n = write(data->socket, message, strlen(message) + 1);
-        if (n != 0) {
+        if (n < 0) {
             perror("error writing to socket");
             sleep(static_cast<unsigned long>(0.25));
         } else {
             bzero(data->buffer, 256);
             n = read(data->socket, data->buffer, 255);
-            if (n != 0) {
+            if (n < 0) {
                 perror("error reading from socket");
                 sleep(static_cast<unsigned long>(0.25));
             } else {
-                data->posuvaSaPanak = atoi(reinterpret_cast<const char *>(data->buffer[0]));
-                data->jeVyherca = atoi(reinterpret_cast<const char *>(data->buffer[1]));
+                data->posuvaSaPanak = atoi(&data->buffer[0]);
+                data->jeVyherca = atoi(&data->buffer[2]);
 
-                data->zahralTah = true;
                 std::cout << "tah bol ukonceny, posunul sa hrac " << data->jeNaTahu << ", s panakom " <<
                           data->posuvaSaPanak << ", o " << data->poslednyHod << " policka" << std::endl;
                 data->updates[data->jeNaTahu - 1] = true;
@@ -88,9 +88,9 @@ void* tah(void *parData) {
     return nullptr;
 }
 
-
 int main() {
 
+    srand(time(nullptr));
     //// atributes
     int sockfd, newsockfd;
     socklen_t cli_len;
@@ -107,6 +107,7 @@ int main() {
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(9999);
 
+
     ////mutex initialization
     pthread_mutex_t mutex;
     pthread_cond_t jeHodene;
@@ -118,7 +119,7 @@ int main() {
     ////threads
     pthread_t hrac;
 
-    DATA data = {1, 0, 0, 0, pocetHracov, false, 0, 0, buffer, updatedAll, &mutex, &jeHodene, &jeOdohrane};
+    DATA data = {1, 0, 0, 0, pocetHracov, false, 0, 0, buffer, updatedAll, &mutex};
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -145,18 +146,19 @@ int main() {
                 perror("Error reading from socket");
                 return 7;
             }
-            if (atoi(buffer) == 0) {
+
+            if (atoi(&buffer[0]) == 0) {
                 lastPlayerId++;
-                const char* message = pocetHracov + "" + lastPlayerId;
+                const char* message = (std::to_string(pocetHracov) + "/" + std::to_string(lastPlayerId)).c_str();
                 n = write(newsockfd, message, strlen(message) + 1);
-                if (n != 0) {
+                if (n < 0) {
                     perror("error writing to socket");
                     lastPlayerId--;
                 }
             } else {
-                const char* message = "000";
+                const char* message = "0/0/0";
                 n = write(newsockfd, message, strlen(message) + 1);
-                if (n != 0)
+                if (n < 0)
                     perror("error writing to socket");
             }
         }
@@ -178,7 +180,7 @@ int main() {
                 perror("Error reading from socket");
                 return 4;
             }
-            data.pripojenyHrac = atoi(buffer);
+            data.pripojenyHrac = atoi(&buffer[0]);
             if (data.pripojenyHrac == data.jeNaTahu && !data.updates[data.pripojenyHrac - 1]) {
                 pthread_create(&hrac, NULL, &tah, &data);
                 pthread_join(hrac, NULL);

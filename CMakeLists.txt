@@ -3,10 +3,8 @@ project(Server)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 add_executable(Server
-        main.cpp
-        server.cpp
-        server.h)
+        main.cpp)
 
