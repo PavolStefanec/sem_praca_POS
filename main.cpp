@@ -10,87 +10,79 @@
 #include <unistd.h>
 
 typedef struct data {
-    int jeNaTahu;
-    int pripojenyHrac;
-    int posuvaSaPanak;
-    int poslednyHod;
-    int pocetHracov;
-    bool jeVyherca;
-    int tahID;
-    int socket;
+    int numberOfPlayers;
+    int actualPlayer;
+    int movingFigure;
+    int rollDice;
+    bool gameIsEnd;
+    int moveID;
+    int numberOfUpdates;
+    int* newsockfdBuffer;
     char* buffer;
-    bool* updates;
-
     pthread_mutex_t* mutex;
+    pthread_cond_t* moveEnd;
+    pthread_cond_t* gameStart;
+    pthread_cond_t* updateEnd;
 } DATA;
 
-void* update(void* parData) {
-    DATA* data = (DATA*) parData;
-
-    int n = -1;
-    int counter = 0;
-    const char *message;
-    message = (std::to_string(data->jeNaTahu) + "/" + std::to_string(data->posuvaSaPanak) + "/"
-               + std::to_string(data->poslednyHod)).c_str();
-    while (n < 0) {
-        counter++;
-        if (counter > 5) {
-            std::cerr << "player is not responding" << std::endl;
-            break;
-        }
-        pthread_mutex_lock(data->mutex);
-        n = write(data->socket, message, strlen(message) + 1);
-        if (n < 0) {
-            perror("error writing to socket");
-            sleep(static_cast<unsigned long>(0.25));
-        } else
-            data->updates[data->pripojenyHrac - 1] = true;
-        pthread_mutex_unlock(data->mutex);
-    }
-    return nullptr;
-}
-
-void* tah(void *parData) {
-    DATA* data = (DATA*) parData;
-
-    int n = -1;
-    int counter = 0;
+void* hra (void* arg) {
+    DATA* data = (DATA*) arg;
+    int idPlayer = data->actualPlayer;
     pthread_mutex_lock(data->mutex);
-    data->poslednyHod = 1 + rand() % 6;
-    const char* message = (std::to_string(data->jeNaTahu) + "/" + std::to_string(data->poslednyHod)).c_str();
-    while (n < 0) {
-        counter++;
-        if (counter > 5) {
-            std::cerr << "player is not responding" << std::endl;
-            break;
-        }
-        n = write(data->socket, message, strlen(message) + 1);
-        if (n < 0) {
-            perror("error writing to socket");
-            sleep(static_cast<unsigned long>(0.25));
-        } else {
+    pthread_cond_wait(data->gameStart, data->mutex);
+    pthread_mutex_unlock(data->mutex);
+    while(!data->gameIsEnd) {
+        if (data->actualPlayer == idPlayer) {
+            //tah
+            if (data->moveID != 1) {
+                while(data->numberOfUpdates != (data->numberOfPlayers - 1)) {
+                    pthread_cond_wait(data->updateEnd, data->mutex);
+                }
+            }
+            data->updateEnd = 0;
+            data->rollDice = 1 + rand() % 6;
+            const char* message = ("1/" + std::to_string(data->rollDice)).c_str();
+            int n = write(data->newsockfdBuffer[idPlayer], message, strlen(message) + 1);
+            if (n < 0) {
+                perror("error writing to socket");
+                return NULL;
+            }
             bzero(data->buffer, 256);
-            n = read(data->socket, data->buffer, 255);
+            n = read(data->newsockfdBuffer[idPlayer], data->buffer, 255);
             if (n < 0) {
                 perror("error reading from socket");
-                sleep(static_cast<unsigned long>(0.25));
-            } else {
-                data->posuvaSaPanak = atoi(&data->buffer[0]);
-                data->jeVyherca = atoi(&data->buffer[2]);
-
-                std::cout << "tah bol ukonceny, posunul sa hrac " << data->jeNaTahu << ", s panakom " <<
-                          data->posuvaSaPanak << ", o " << data->poslednyHod << " policka" << std::endl;
-                data->updates[data->jeNaTahu - 1] = true;
+                return NULL;
             }
+            data->movingFigure = atoi(&data->buffer[0]);
+            data->gameIsEnd = atoi(&data->buffer[2]);
+            std::cout << "Ťah bol ukončený, posunul sa hráč: " << idPlayer<< ", s figúrkou číslo: " <<
+                      data->movingFigure << " o: " << data->rollDice << std::endl;
+            //zmena dalsieho hraca
+            data->actualPlayer = 1 + data->moveID % data->numberOfPlayers;
+            data->moveID++;
+
+            pthread_mutex_unlock(data->mutex);
+            pthread_cond_broadcast(data->moveEnd);
+        } else {
+            //update
+            pthread_cond_wait(data->moveEnd, data->mutex);
+            const char* message = ("2/" + std::to_string(data->actualPlayer) + "/" + std::to_string(data->movingFigure) + "/" + std::to_string(data->rollDice)).c_str();
+            int n = write(data->newsockfdBuffer[idPlayer], message, strlen(message) + 1);
+            if (n < 0) {
+                perror("error writing to socket");
+                return NULL;
+            }
+            data->numberOfUpdates ++;
+            pthread_mutex_unlock(data->mutex);
+            pthread_cond_broadcast(data->updateEnd);
         }
     }
-    pthread_mutex_unlock(data->mutex);
-    return nullptr;
+    close(data->newsockfdBuffer[idPlayer]);
+    return NULL;
 }
-
-int main() {
-
+int main(int argc, char* argv[]) {
     srand(time(nullptr));
+
     //// atributes
     int sockfd, newsockfd;
     socklen_t cli_len;
@@ -98,32 +90,42 @@ int main() {
     struct sockaddr_in cli_addr;
     int n;
     char buffer[256];
-    int pocetHracov = 2;
-    bool updates[pocetHracov];
-    for (int i = 0; i < pocetHracov; i++) {
-        updates[i] = false;
-    }
+    int numberOfPlayers;
     int lastPlayerId = 0;
 
+    //nadstavenie poctu hracov
+    if (argc < 1) {
+        numberOfPlayers = 2;
+    } else {
+        numberOfPlayers = atoi(argv[1]);
+        if (numberOfPlayers > 4)
+            numberOfPlayers = 4;
+    }
+    printf("Pocet ocakavanych hracov v spustenej hre LUDO: %d", numberOfPlayers);
+
+    int newsockfdBuffer[numberOfPlayers];
+
+    //inicializacia
     bzero((char*)&serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(9999);
 
-
-    ////mutex initialization
     pthread_mutex_t mutex;
-    pthread_cond_t jeHodene;
-    pthread_cond_t jeOdohrane;
+    pthread_cond_t moveEnd;
+    pthread_cond_t gameStart;
+    pthread_cond_t updateEnd;
     pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&jeHodene, NULL);
-    pthread_cond_init(&jeOdohrane, NULL);
+    pthread_cond_init(&moveEnd, NULL);
+    pthread_cond_init(&gameStart, NULL);
+    pthread_cond_init(&updateEnd, NULL);
 
     ////threads
-    pthread_t hrac;
+    pthread_t hrac[numberOfPlayers];
 
-    DATA data = {1, 0, 0, 0, pocetHracov, false, 0, 0, buffer, updates, &mutex};
+    DATA data = {numberOfPlayers, 1, 0, 0, false, 1, 0, newsockfdBuffer, buffer, &mutex, &moveEnd, &gameStart, &updateEnd};
 
+    //Socket communication
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
         perror("Error creating socket");
@@ -135,92 +137,55 @@ int main() {
         return 2;
     }
 
-    while (lastPlayerId != pocetHracov) {
+    while(!data.gameIsEnd) {
+        bool workWithSocket = true;
         listen(sockfd, 5);
         cli_len = sizeof(cli_addr);
         newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &cli_len);
         if (newsockfd < 0) {
             perror("ERROR on accept");
-            return 3;
-        } else {
+            workWithSocket = false;
+        }
+        if (workWithSocket) {
             bzero(buffer, 256);
             n = read(newsockfd, buffer, 255);
             if (n < 0) {
                 perror("Error reading from socket");
-                return 7;
+                workWithSocket = false;
             }
-
-            if (atoi(&buffer[0]) == 0) {
+        }
+        if (workWithSocket) {
+            if (numberOfPlayers != lastPlayerId) {
                 lastPlayerId++;
-                const char* message = (std::to_string(pocetHracov) + "/" + std::to_string(lastPlayerId)).c_str();
+                const char *message = (std::to_string(numberOfPlayers) + "/" + std::to_string(lastPlayerId)).c_str();
                 n = write(newsockfd, message, strlen(message) + 1);
                 if (n < 0) {
                     perror("error writing to socket");
                     lastPlayerId--;
+                    workWithSocket = false;
                 }
-            } else {
-                const char* message = "0/0/0";
-                n = write(newsockfd, message, strlen(message) + 1);
-                if (n < 0)
-                    perror("error writing to socket");
-            }
-        }
-    }
+                if (workWithSocket) {
+                    pthread_mutex_lock(data.mutex);
+                    data.newsockfdBuffer[lastPlayerId] = newsockfd;
+                    pthread_mutex_unlock(data.mutex);
 
-    while (!data.jeVyherca) {
-        listen(sockfd, 5);
-        cli_len = sizeof(cli_addr);
-        newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &cli_len);
-        if (newsockfd < 0) {
-            perror("ERROR on accept");
-            return 3;
-        } else {
-            data.socket = newsockfd;
+                    pthread_create(&hrac[lastPlayerId - 1], NULL, &hra, &data);
+                    //mozno nefunguje a treba prestudovat atributy vlakna
+                    pthread_join(hrac[lastPlayerId-1], NULL);
 
-            bzero(buffer, 256);
-            n = read(newsockfd, buffer, 255);
-            if (n < 0) {
-                perror("Error reading from socket");
-                return 4;
-            }
-            data.pripojenyHrac = atoi(&buffer[0]);
-            if (data.pripojenyHrac == data.jeNaTahu && !data.updates[data.pripojenyHrac - 1]) {
-                pthread_create(&hrac, NULL, &tah, &data);
-                pthread_join(hrac, NULL);
-                if (!data.updates[data.pripojenyHrac - 1]) {
-                    std::cerr << "player disconnected from the game... GAME OVER" << std::endl;
-                    return 9999;
-                }
-            } else if (!data.updates[data.pripojenyHrac - 1] && data.updates[data.jeNaTahu - 1]) {
-                pthread_create(&hrac, NULL, &update, &data);
-                pthread_join(hrac, NULL);
-                if (!data.updates[data.pripojenyHrac - 1]) {
-                    std::cerr << "player disconnected from the game... GAME OVER" << std::endl;
-                    return 9999;
-                }
-                bool updatedAll = true;
-                for (int i = 0; i < pocetHracov; i++) {
-                    if (!data.updates[i]) {
-                        updatedAll = false;
-                        break;
+                    if (lastPlayerId == numberOfPlayers) {
+                        pthread_cond_broadcast(data.gameStart);
                     }
-                }
-                if (updatedAll) {
-                    data.jeNaTahu = 1 + data.tahID % data.pocetHracov;
-                    data.tahID++;
-                    for (int i = 0; i < pocetHracov; i++) {
-                        data.updates[i] = false;
-                    }
+
                 }
             }
         }
+
     }
-    close(newsockfd);
     close(sockfd);
-
-    pthread_cond_destroy(&jeHodene);
-    pthread_cond_destroy(&jeOdohrane);
+    pthread_cond_destroy(&gameStart);
+    pthread_cond_destroy(&moveEnd);
+    pthread_cond_destroy(&updateEnd);
     pthread_mutex_destroy(&mutex);
-
     return 0;
 }
