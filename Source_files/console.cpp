@@ -139,9 +139,9 @@ void Console::setActivePlayer(int idPlayer) {
 
 void Console::move(int number, int position) {
     if (game->move(position -1, number)) {
-        cout<< "\033[1;" << activePlayer << "m Ťah sa podarilo vykonať! \033[0m";
+        cout<< "\033[1;" << activePlayer << "m Ťah sa podarilo vykonať! \033[0m" << endl;
     } else {
-        cout<< "\033[1;" << activePlayer << "m Ťah sa nepodarilo vykonať! \033[0m";
+        cout<< "\033[1;" << activePlayer << "m Ťah sa nepodarilo vykonať! \033[0m" << endl;
     }
 }
 

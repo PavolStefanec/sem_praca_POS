@@ -82,8 +82,8 @@ int main(int argc, char* args[]) {
             int figure = game->getNumberOfPiece(value);
             if (figure > 0 && figure < 5) {
                 game->move(value, figure);
-                game->drawBoard();
             }
+            game->drawBoard();
             int isWinner = 0;
             if (game->isEnd()) {
                 cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
