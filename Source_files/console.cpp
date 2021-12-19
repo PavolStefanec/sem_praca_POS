@@ -24,6 +24,7 @@ int Console::getNumberOfPiece(int value) {
         cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Preskakuješ ťah! \033[0m"<<endl;
     if (pieceNumber < 0 || pieceNumber > 5) {
         cout<<"\033[1;" << COLOR_NUMBER + activePlayer - 1 <<"m Zvolené figúrka neexistuje! \033[0m"<<endl;
+        pieceNumber = 0;
     }
     return pieceNumber;
 }
@@ -137,7 +138,11 @@ void Console::setActivePlayer(int idPlayer) {
 }
 
 void Console::move(int number, int position) {
-    game->move(position -1, number);
+    if (game->move(position -1, number)) {
+        cout<< "\033[1;" << activePlayer << "m Ťah sa podarilo vykonať! \033[0m";
+    } else {
+        cout<< "\033[1;" << activePlayer << "m Ťah sa nepodarilo vykonať! \033[0m";
+    }
 }
 
 
