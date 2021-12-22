@@ -45,12 +45,20 @@ void* hra (void* arg) {
             int n = write(data->newsockfdBuffer[idPlayer - 1], message, strlen(message) + 1);
             if (n < 0) {
                 perror("error writing to socket");
+                //ukoncenie
+                data->gameIsEnd = 1;
+                pthread_mutex_unlock(data->mutex);
+                close(data->newsockfdBuffer[idPlayer - 1]);
                 return NULL;
             }
             bzero(data->buffer, 256);
             n = read(data->newsockfdBuffer[idPlayer -1], data->buffer, 255);
             if (n < 0) {
                 perror("error reading from socket");
+                //ukoncenie
+                data->gameIsEnd = 1;
+                pthread_mutex_unlock(data->mutex);
+                close(data->newsockfdBuffer[idPlayer - 1]);
                 return NULL;
             }
             data->movingFigure = atoi(&data->buffer[0]);
@@ -66,6 +74,10 @@ void* hra (void* arg) {
                     printf("Update hraca s id %d sa vykonal\n", i+1);
                     if (n < 0) {
                         perror("error writing to socket");
+                        //ukoncenie
+                        data->gameIsEnd = 1;
+                        pthread_mutex_unlock(data->mutex);
+                        close(data->newsockfdBuffer[idPlayer - 1]);
                         return NULL;
                     }
                 }
@@ -137,7 +149,7 @@ int main(int argc, char* argv[]) {
         return 2;
     }
 
-    while(!data.gameIsEnd) {
+    while(numberOfPlayers != lastPlayerId) {
         bool workWithSocket = true;
         listen(sockfd, 5);
         cli_len = sizeof(cli_addr);
@@ -147,27 +159,26 @@ int main(int argc, char* argv[]) {
             workWithSocket = false;
         }
         if (workWithSocket) {
-            if (numberOfPlayers != lastPlayerId) {
-                lastPlayerId++;
-                const char *message = (std::to_string(numberOfPlayers) + "/" + std::to_string(lastPlayerId)).c_str();
-                n = write(newsockfd, message, strlen(message) + 1);
-                if (n < 0) {
-                    perror("error writing to socket");
-                    lastPlayerId--;
-                    workWithSocket = false;
-                }
-                if (workWithSocket) {
-                    pthread_mutex_lock(data.mutex);
-                    data.actualPlayer = lastPlayerId;
-                    data.newsockfdBuffer[lastPlayerId - 1] = newsockfd;
-                    pthread_mutex_unlock(data.mutex);
+            lastPlayerId++;
+            const char *message = (std::to_string(numberOfPlayers) + "/" + std::to_string(lastPlayerId)).c_str();
+            n = write(newsockfd, message, strlen(message) + 1);
+            if (n < 0) {
+                perror("error writing to socket");
+                lastPlayerId--;
+                workWithSocket = false;
+            }
+            if (workWithSocket) {
+                pthread_mutex_lock(data.mutex);
+                data.actualPlayer = lastPlayerId;
+                data.newsockfdBuffer[lastPlayerId - 1] = newsockfd;
+                pthread_mutex_unlock(data.mutex);
 
-                    pthread_create(&hrac[lastPlayerId - 1], NULL, &hra, &data);
-                }
+                pthread_create(&hrac[lastPlayerId - 1], NULL, &hra, &data);
             }
         }
-
     }
+
+    //ukoncenie
     for (int i = 0; i < numberOfPlayers; i++)
         pthread_join(hrac[i], NULL);
     close(sockfd);
