@@ -112,6 +112,8 @@ int main(int argc, char* argv[]) {
         numberOfPlayers = atoi(argv[1]);
         if (numberOfPlayers > 4)
             numberOfPlayers = 4;
+        if (numberOfPlayers < 2)
+            numberOfPlayers = 2;
     }
     printf("Pocet ocakavanych hracov v spustenej hre LUDO: %d\n", numberOfPlayers);
 
