@@ -1,7 +1,4 @@
 #include "../../Header_files/App/board.h"
-#include "../../Header_files/consts.h"
-
-//public
 
 Board::Board(int pNumberOfPlayers) {
     numberOfPlayers = pNumberOfPlayers;
@@ -100,8 +97,6 @@ void Board::leavePieceEnd(Piece *piece) {
 void Board::leavePieceNormal(Piece *piece) {
     normalFields[piece->getPosition()]->setPiece(nullptr);
 }
-
-//private
 
 Piece* Board::getRemovedPieceNormal(int position) {
     Piece* piece;
