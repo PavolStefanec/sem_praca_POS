@@ -1,7 +1,7 @@
 #include <iostream>
 #include <pthread.h>
+#include <valgrind/valgrind.h>
 
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
