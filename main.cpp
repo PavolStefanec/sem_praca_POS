@@ -67,7 +67,6 @@ int main(int argc, char* args[]) {
     game = new Console(numberOfPlayers);
     game->start();
     game->drawBoard();
-
     while(gameIsPlaying) {
         bzero(buffer, 256);
         n = read(sockfd, buffer, 255);
@@ -114,6 +113,8 @@ int main(int argc, char* args[]) {
                          << "m Žiaľ, tebe to dnes nevyšlo, možno nabudúce! \033[0m";
                     gameIsPlaying = false;
                 }
+            } else {
+                game->drawBoard();
             }
         }
     }

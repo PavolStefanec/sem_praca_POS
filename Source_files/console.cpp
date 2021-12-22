@@ -145,7 +145,6 @@ void Console::move(int number, int position) {
     }
 }
 
-
 bool Console::isEnd() {
     return game->isEnd();
 }
