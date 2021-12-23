@@ -6,8 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <iostream>
-#include "Header_files/console.h"
-
+#include "Header_files/interface.h"
 
 using namespace std;
 
@@ -20,7 +19,7 @@ int main(int argc, char* args[]) {
 
     int idPlayer = 0;
     int numberOfPlayers = 0;
-    Console* game = nullptr;
+    Interface* game = nullptr;
     bool gameIsPlaying = true;
 
     server = gethostbyname("localhost");
@@ -63,10 +62,13 @@ int main(int argc, char* args[]) {
     printf("Si v hre!\n");
     std::cout << "Celkový počet hráčov v hre: " << numberOfPlayers << std::endl;
     printf("Tvoje číslo hráča: %d\n", idPlayer);
-    game = new Console(numberOfPlayers);
+    game = new Interface(numberOfPlayers);
     game->start();
     game->drawBoard();
+    //verzia pre rychle ukoncenie hry
+    int counter = 0;
     while(gameIsPlaying) {
+    //while(counter < 2) {
         bzero(buffer, 256);
         n = read(sockfd, buffer, 255);
         if (n < 0) {
@@ -75,6 +77,8 @@ int main(int argc, char* args[]) {
         }
         int acctionType = atoi(&buffer[0]);
         if (acctionType == 1) {
+            //rychle ukoncenie hry
+            counter++;
             game->setActivePlayer(idPlayer);
             int value = atoi(&buffer[2]);
             int figure = game->getNumberOfPiece(value);
@@ -113,6 +117,7 @@ int main(int argc, char* args[]) {
                     gameIsPlaying = false;
                 }
             } else {
+                cout<<"\033[1;" << COLOR_NUMBER + movingPlayer - 1 <<"m Hráč preskakuje ťah! \033[0m"<<endl;
                 game->drawBoard();
             }
         }

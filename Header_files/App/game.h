@@ -15,9 +15,6 @@ private:
     bool moveNormal(Piece* piece, int numberOfMove);
     bool moveNormalEnd(Piece* piece, int startPosition, int numberOfMove);
     bool moveEndEnd(Piece* piece, int numberOfMove);
-//    Piece* getHomeFieldPiece(int idPlayer, int position);
-//    Piece* getEndFieldPiece(int idPlayer, int position);
-//    Piece* getNormalFieldPiece(int position);
 
 public:
     Game(int pNumberOfPlayers);

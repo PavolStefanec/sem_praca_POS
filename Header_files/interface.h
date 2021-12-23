@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Console{
+class Interface{
 private:
     Game* game;
     int activePlayer;
@@ -23,14 +23,13 @@ private:
     void drawLongLine(int position1, int position2, int idPlayer, int positionEnd, bool positive = true);
 
 public:
-    Console(int numberOfPlayer);
-    ~Console();
+    Interface(int numberOfPlayer);
+    ~Interface();
     void setActivePlayer(int idPlayer);
     int getNumberOfPiece(int value);
     void start();
     bool isEnd();
     void drawBoard();
-    void clear();
     void move(int number, int position);
 };
 
