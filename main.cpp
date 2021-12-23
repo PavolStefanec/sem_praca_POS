@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <iostream>
+#include <sstream>
 #include "Header_files/interface.h"
 
 using namespace std;
@@ -35,7 +36,17 @@ int main(int argc, char* args[]) {
             (char *) &serv_addr.sin_addr.s_addr,
             server->h_length
     );
-    serv_addr.sin_port = htons(9999);
+
+    std::cout << "zadajte cislo portu: " << std::endl;
+    std::string input;
+    std::cin >> input;
+    int inputInt = stoi(input);
+    if (inputInt < 1024 || inputInt > 49151) {
+        std::cout << "neplatne cislo portu" << std::endl;
+        return 10;
+    }
+
+    serv_addr.sin_port = htons(atoi(input.c_str()));
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
