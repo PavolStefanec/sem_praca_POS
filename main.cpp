@@ -38,8 +38,8 @@ void* hra (void* arg) {
     }
     //kontrolna verzia
     int counter = 0;
-    while(!data->gameIsEnd) {
-    //while(counter < 2) {
+    //while(!data->gameIsEnd) {
+    while(counter < 4) {
         if (data->actualPlayer == idPlayer) {
             //tah
             //kontrolna verzia
