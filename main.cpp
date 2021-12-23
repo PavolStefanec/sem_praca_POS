@@ -128,7 +128,17 @@ int main(int argc, char* argv[]) {
     bzero((char*)&serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
-    serv_addr.sin_port = htons(9999);
+
+    std::cout << "zadajte cislo portu: " << std::endl;
+    std::string input;
+    std::cin >> input;
+    int inputInt = stoi(input);
+    if (inputInt < 1024 || inputInt > 49151) {
+        std::cout << "neplatne cislo portu" << std::endl;
+        return 10;
+    }
+
+    serv_addr.sin_port = htons(inputInt);
 
     pthread_mutex_t mutex;
     pthread_cond_t gameStart;
