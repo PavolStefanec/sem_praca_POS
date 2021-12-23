@@ -126,13 +126,9 @@ int main(int argc, char* argv[]) {
     serv_addr.sin_port = htons(9999);
 
     pthread_mutex_t mutex;
-    pthread_cond_t moveEnd;
     pthread_cond_t gameStart;
-    pthread_cond_t updateEnd;
     pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&moveEnd, NULL);
     pthread_cond_init(&gameStart, NULL);
-    pthread_cond_init(&updateEnd, NULL);
 
     ////threads
     pthread_t hrac[numberOfPlayers];
@@ -185,8 +181,6 @@ int main(int argc, char* argv[]) {
         pthread_join(hrac[i], NULL);
     close(sockfd);
     pthread_cond_destroy(&gameStart);
-    pthread_cond_destroy(&moveEnd);
-    pthread_cond_destroy(&updateEnd);
     pthread_mutex_destroy(&mutex);
     return 0;
 }
