@@ -77,9 +77,9 @@ int main(int argc, char* args[]) {
     game->start();
     game->drawBoard();
     //verzia pre rychle ukoncenie hry
-    int counter = 0;
-    //while(gameIsPlaying) {
-    while(counter < 4) {
+    //int counter = 0;
+    while(gameIsPlaying) {
+    //while(counter < 4) {
         bzero(buffer, 256);
         n = read(sockfd, buffer, 255);
         if (n < 0) {
@@ -89,7 +89,7 @@ int main(int argc, char* args[]) {
         int acctionType = atoi(&buffer[0]);
         if (acctionType == 1) {
             //rychle ukoncenie hry
-            counter++;
+            //counter++;
             game->setActivePlayer(idPlayer);
             int value = atoi(&buffer[2]);
             int figure = game->getNumberOfPiece(value);
