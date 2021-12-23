@@ -36,9 +36,14 @@ void* hra (void* arg) {
         pthread_mutex_unlock(data->mutex);
         pthread_cond_broadcast(data->gameStart);
     }
+    //kontrolna verzia
+    int counter = 0;
     while(!data->gameIsEnd) {
+    //while(counter < 2) {
         if (data->actualPlayer == idPlayer) {
             //tah
+            //kontrolna verzia
+            counter++;
             pthread_mutex_lock(data->mutex);
             data->rollDice = 1 + rand() % 6;
             const char* message = ("1/" + std::to_string(data->rollDice)).c_str();
