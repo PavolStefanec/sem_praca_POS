@@ -1,0 +1,3 @@
+/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/rebuild_cache.dir
+/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/edit_cache.dir
+/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/ludo.dir

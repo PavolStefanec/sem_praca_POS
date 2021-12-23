@@ -77,63 +77,63 @@ int main(int argc, char* args[]) {
     game->start();
     game->drawBoard();
     //verzia pre rychle ukoncenie hry
-    int counter = 0;
-    //while(gameIsPlaying) {
-    while(counter < 4) {
-        bzero(buffer, 256);
-        n = read(sockfd, buffer, 255);
-        if (n < 0) {
-            perror("Error reading from socket");
-            return 5;
-        }
-        int acctionType = atoi(&buffer[0]);
-        if (acctionType == 1) {
-            //rychle ukoncenie hry
-            counter++;
-            game->setActivePlayer(idPlayer);
-            int value = atoi(&buffer[2]);
-            int figure = game->getNumberOfPiece(value);
-            if (figure > 0 && figure < 5) {
-                game->move(value, figure);
-            }
-            game->drawBoard();
-            int isWinner = 0;
-            if (game->isEnd()) {
-                cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
-                     << "m GRATULUJEME! Vyhral si!: \033[0m";
-                gameIsPlaying = false;
-                isWinner = 1;
-            }
-            const char *figureCH = (std::to_string(figure) + "/" + std::to_string(isWinner)).c_str();
-            n = write(sockfd, figureCH, strlen(figureCH) + 1);
+//    int counter = 0;
+//    while(counter < 4) {
+    while(gameIsPlaying) {
+            bzero(buffer, 256);
+            n = read(sockfd, buffer, 255);
             if (n < 0) {
-                perror("Error writing to socket");
-                return 6;
+                perror("Error reading from socket");
+                return 5;
             }
-        } else {
-            int movingPlayer = atoi(&buffer[2]);
-            int figure = atoi(&buffer[4]);
-            int number = atoi(&buffer[6]);
-            if (figure != 0) {
-                game->setActivePlayer(movingPlayer);
-                game->move(number, figure);
+            int acctionType = atoi(&buffer[0]);
+            if (acctionType == 1) {
+                //rychle ukoncenie hry
+//                counter++;
+                game->setActivePlayer(idPlayer);
+                int value = atoi(&buffer[2]);
+                int figure = game->getNumberOfPiece(value);
+                if (figure > 0 && figure < 5) {
+                    game->move(value, figure);
+                }
                 game->drawBoard();
+                int isWinner = 0;
                 if (game->isEnd()) {
                     cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
-                         << "m Víťazom sa stáva hráč číslo: \033[0m";
-                    cout << "\033[1;" << COLOR_NUMBER + movingPlayer - 1 << "m " << movingPlayer
-                         << "\033[0m" << endl;
-                    cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
-                         << "m Žiaľ, tebe to dnes nevyšlo, možno nabudúce! \033[0m";
+                         << "m GRATULUJEME! Vyhral si!: \033[0m";
                     gameIsPlaying = false;
+                    isWinner = 1;
+                }
+                const char *figureCH = (std::to_string(figure) + "/" + std::to_string(isWinner)).c_str();
+                n = write(sockfd, figureCH, strlen(figureCH) + 1);
+                if (n < 0) {
+                    perror("Error writing to socket");
+                    return 6;
                 }
             } else {
-                cout<<"\033[1;" << COLOR_NUMBER + movingPlayer - 1 <<"m Hráč preskakuje ťah! \033[0m"<<endl;
-                game->drawBoard();
+                int movingPlayer = atoi(&buffer[2]);
+                int figure = atoi(&buffer[4]);
+                int number = atoi(&buffer[6]);
+                if (figure != 0) {
+                    game->setActivePlayer(movingPlayer);
+                    game->move(number, figure);
+                    game->drawBoard();
+                    if (game->isEnd()) {
+                        cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
+                             << "m Víťazom sa stáva hráč číslo: \033[0m";
+                        cout << "\033[1;" << COLOR_NUMBER + movingPlayer - 1 << "m " << movingPlayer
+                             << "\033[0m" << endl;
+                        cout << "\033[1;" << COLOR_NUMBER + idPlayer - 1
+                             << "m Žiaľ, tebe to dnes nevyšlo, možno nabudúce! \033[0m";
+                        gameIsPlaying = false;
+                    }
+                } else {
+                    cout<<"\033[1;" << COLOR_NUMBER + movingPlayer - 1 <<"m Hráč preskakuje ťah! \033[0m"<<endl;
+                    game->drawBoard();
+                }
             }
         }
-    }
-    close(sockfd);
+        close(sockfd);
     if (game)
         delete game;
     return 0;
