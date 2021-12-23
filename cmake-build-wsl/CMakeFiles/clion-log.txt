@@ -1,0 +1,4 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu --exec /bin/bash -c "export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd '/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/Server/cmake-build-wsl' && /usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' '/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/Server'; exitcode=$?; sleep 0.001; (exit $exitcode)"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/Server/cmake-build-wsl
