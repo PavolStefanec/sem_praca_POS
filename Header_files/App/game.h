@@ -20,7 +20,6 @@ public:
     Game(int pNumberOfPlayers);
     ~Game();
     void start();
-    int getActiveIdPlayer();
     void setActiveIdPlayer(int idPlayer);
     bool move(int piecePosition, int numberOfMove);
     bool isEnd();

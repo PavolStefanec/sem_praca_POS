@@ -65,7 +65,6 @@ bool Game::moveHomeStart(Piece *piece, int numberOfMove) {
         if (removedPiece != nullptr) {
             moveNormalHome(removedPiece);
         }
-        //setInfoMovedPiece(piece);
         return true;
     }
     return false;
@@ -137,10 +136,6 @@ bool Game::moveEndEnd(Piece *piece, int numberOfMove) {
     //posun v endFiles
     board->setEnd(piece, piece->getPosition() + numberOfMove);
     return true;
-}
-
-int Game::getActiveIdPlayer() {
-    return activeIdPlayer;
 }
 
 int Game::getHomeFieldColor(int idPlayer, int position) {

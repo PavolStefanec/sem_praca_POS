@@ -67,8 +67,8 @@ int main(int argc, char* args[]) {
     game->drawBoard();
     //verzia pre rychle ukoncenie hry
     int counter = 0;
-    while(gameIsPlaying) {
-    //while(counter < 2) {
+    //while(gameIsPlaying) {
+    while(counter < 4) {
         bzero(buffer, 256);
         n = read(sockfd, buffer, 255);
         if (n < 0) {
