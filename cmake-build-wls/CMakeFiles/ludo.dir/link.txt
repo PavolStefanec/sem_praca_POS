@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread -g CMakeFiles/ludo.dir/main.cpp.o CMakeFiles/ludo.dir/Source_files/interface.cpp.o CMakeFiles/ludo.dir/Source_files/App/board.cpp.o CMakeFiles/ludo.dir/Source_files/App/field.cpp.o CMakeFiles/ludo.dir/Source_files/App/game.cpp.o CMakeFiles/ludo.dir/Source_files/App/piece.cpp.o -o ludo 

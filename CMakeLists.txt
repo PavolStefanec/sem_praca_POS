@@ -2,16 +2,6 @@ cmake_minimum_required(VERSION 3.7.2)
 project(ludo)
 
 set(CMAKE_CXX_STANDARD 14)
-#set(SDL2_INCLUDE_DIR C:/libs/SDL/include)
-#set(SDL2_LIB_DIR C:/libs/SDL/lib/x86)
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -SDL")
-#include_directories(${SDL2_INCLUDE_DIR})
-#link_directories(${SDL2_LIB_DIR})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
-
-
-add_executable(ludo main.cpp Header_files/App/board.h Source_files/App/board.cpp Header_files/consts.h Header_files/App/field.h Source_files/App/field.cpp Header_files/App/piece.h Source_files/App/piece.cpp Header_files/App/player.h Source_files/App/player.cpp Header_files/App/game.h Source_files/App/game.cpp Header_files/console.h Source_files/console.cpp)
-
-#target_link_libraries(${PROJECT_NAME} SDL2main SDL2 SDL2_IMAGE)
-
-
+add_executable(ludo main.cpp Header_files/consts.h Header_files/interface.h Header_files/App/board.h Header_files/App/field.h Header_files/App/game.h Header_files/App/piece.h Source_files/interface.cpp Source_files/App/board.cpp Source_files/App/field.cpp Source_files/App/game.cpp Source_files/App/piece.cpp)

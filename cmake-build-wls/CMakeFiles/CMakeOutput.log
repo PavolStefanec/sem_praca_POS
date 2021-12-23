@@ -1,0 +1,55 @@
+The system is: Linux - 4.4.0-19041-Microsoft - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/3.20.0/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/3.20.0/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_acbf7/fast && /usr/bin/make  -f CMakeFiles/cmTC_acbf7.dir/build.make CMakeFiles/cmTC_acbf7.dir/build
+make[1]: Entering directory '/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_acbf7.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_acbf7.dir/testCCompiler.c.o -c "/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp/testCCompiler.c"
+Linking C executable cmTC_acbf7
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_acbf7.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_acbf7.dir/testCCompiler.c.o -o cmTC_acbf7 
+make[1]: Leaving directory '/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_898ae/fast && /usr/bin/make  -f CMakeFiles/cmTC_898ae.dir/build.make CMakeFiles/cmTC_898ae.dir/build
+make[1]: Entering directory '/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_898ae.dir/testCXXCompiler.cxx.o
+/usr/bin/c++    -o CMakeFiles/cmTC_898ae.dir/testCXXCompiler.cxx.o -c "/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp/testCXXCompiler.cxx"
+Linking CXX executable cmTC_898ae
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_898ae.dir/link.txt --verbose=1
+/usr/bin/c++ CMakeFiles/cmTC_898ae.dir/testCXXCompiler.cxx.o -o cmTC_898ae 
+make[1]: Leaving directory '/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/CMakeFiles/CMakeTmp'
+
+
+

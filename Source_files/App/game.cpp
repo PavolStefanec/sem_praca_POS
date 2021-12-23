@@ -1,14 +1,9 @@
 #include "../../Header_files/App/game.h"
 
-//public
 
 Game::Game(int pNumberOfPlayers){
     numberOfPlayers = pNumberOfPlayers;
     activeIdPlayer = -1;
-    //resetInfoPiece();
-//    for (int i = 0; i < numberOfPlayers; i++) {
-//        players[i] = new Player(i + 1);
-//    }
     for (int i = 0; i < NUMBER_OF_MAX_PLAYERS; i++) {
         for (int j = 0; j < NUMBER_OF_PIECES; j++) {
             pieces[i][j] = new Piece(i + 1,i * FIELDS_BEWTWEEN_TWO_STARTS, j);
@@ -18,9 +13,6 @@ Game::Game(int pNumberOfPlayers){
 }
 
 Game::~Game() {
-//    for (int i = 0; i < numberOfPlayers; i++) {
-//        delete players[i];
-//    }
     //figurky mazem v board
     delete board;
 }
@@ -39,7 +31,6 @@ void Game::setActiveIdPlayer(int idPlayer) {
 
 
 bool Game::move(int piecePosition, int numberOfMove) {
-    //resetInfoPiece();
     Piece* piece = pieces[activeIdPlayer-1][piecePosition];
     switch (piece->getType()) {
         case home:
@@ -52,16 +43,15 @@ bool Game::move(int piecePosition, int numberOfMove) {
     return false;
 }
 
-bool Game::isEnd(int idPlayer) {
+bool Game::isEnd() {
     for (int i = 0; i < NUMBER_OF_PIECES; i++) {
-        if (!board->isEndOccupied(idPlayer,i)) {
+        if (!board->isEndOccupied(activeIdPlayer,i)) {
             return false;
         }
     }
     return true;
 }
 
-//private
 
 bool Game::moveHomeStart(Piece *piece, int numberOfMove) {
     if (numberOfMove == SIX) {
@@ -75,7 +65,6 @@ bool Game::moveHomeStart(Piece *piece, int numberOfMove) {
         if (removedPiece != nullptr) {
             moveNormalHome(removedPiece);
         }
-        //setInfoMovedPiece(piece);
         return true;
     }
     return false;
@@ -83,7 +72,6 @@ bool Game::moveHomeStart(Piece *piece, int numberOfMove) {
 
 void Game::moveNormalHome(Piece *piece) {
     board->setHome(piece);
-    //setInfoRemovedPiece(piece);
 }
 
 bool Game::moveNormal(Piece *piece, int numberOfMove) {
@@ -114,7 +102,6 @@ bool Game::moveNormal(Piece *piece, int numberOfMove) {
         if (removedPiece != nullptr) {
             moveNormalHome(removedPiece);
         }
-        //setInfoMovedPiece(piece);
         return true;
     }
 }
@@ -148,12 +135,7 @@ bool Game::moveEndEnd(Piece *piece, int numberOfMove) {
     board->leavePieceEnd(piece);
     //posun v endFiles
     board->setEnd(piece, piece->getPosition() + numberOfMove);
-    //setInfoMovedPiece(piece);
     return true;
-}
-
-int Game::getActiveIdPlayer() {
-    return activeIdPlayer;
 }
 
 int Game::getHomeFieldColor(int idPlayer, int position) {
@@ -179,53 +161,6 @@ int Game::getNormalFieldColor(int position) {
 int Game::getNormalFieldNumber(int position) {
     return board->getNormalFieldNumber(position);
 }
-
-//void Game::resetInfoPiece() {
-//    newTypeOfPiece = none;
-//    newPositionOfPiece = -1;
-//    idPlayerOfRemovedPiece = -1;
-//    newPositionOfRemovedPiece = -1;
-//    numberOfRemovedPiece = -1;
-//}
-//
-//void Game::setInfoRemovedPiece(Piece* removedPiece) {
-//    idPlayerOfRemovedPiece = removedPiece->getIdPlayer();
-//    newPositionOfRemovedPiece = removedPiece->getPosition();
-//    numberOfRemovedPiece = removedPiece->getNumberOfPiece();
-//}
-//
-//void Game::setInfoMovedPiece(Piece *piece) {
-//    newTypeOfPiece = piece->getType();
-//    newPositionOfPiece = piece->getPosition();
-//}
-//
-//bool Game::wasRemovedPiece() {
-//    if (idPlayerOfRemovedPiece == -1)
-//        return false;
-//    return true;
-//}
-//
-//int Game::getNewPositionOfPiece() {
-//    return newPositionOfPiece;
-//}
-//
-//int Game::getIdPlayerOfRemovedPiece() {
-//    return idPlayerOfRemovedPiece;
-//}
-//
-//int Game::getNewPositionOfRemovedPiece() {
-//    return newPositionOfRemovedPiece;
-//}
-//
-//Type Game::getNewTypeOfPiece() {
-//    return newTypeOfPiece;
-//}
-//
-//int Game::getNumberOfRemovedPiece() {
-//    return numberOfRemovedPiece;
-//}
-//
-//
 
 
 

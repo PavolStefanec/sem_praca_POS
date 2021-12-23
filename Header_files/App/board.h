@@ -1,9 +1,6 @@
 #pragma once
-#ifndef UNTITLED_BOARD_H
-#define UNTITLED_BOARD_H
+
 #include "field.h"
-#include "piece.h"
-#include "../consts.h"
 
 class Board {
 private:
@@ -40,5 +37,4 @@ public:
     void leavePieceEnd(Piece* piece);
     void leavePieceNormal(Piece* piece);
 };
-#endif //UNTITLED_BOARD_H
 

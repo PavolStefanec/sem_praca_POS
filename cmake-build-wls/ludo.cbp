@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ludo"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ludo">
+				<Option output="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/ludo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 ludo"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ludo/fast">
+				<Option output="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls/ludo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/cmake-build-wls"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 ludo/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/FRIcka/5.\ Semester/Principy\ Operacnych\ Systemov/semestralka/sem_praca_POS/cmake-build-wls/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Header_files/App/board.h">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Header_files/App/field.h">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Header_files/App/game.h">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Header_files/App/piece.h">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Header_files/consts.h">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Header_files/interface.h">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Source_files/App/board.cpp">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Source_files/App/field.cpp">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Source_files/App/game.cpp">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Source_files/App/piece.cpp">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/Source_files/interface.cpp">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/main.cpp">
+			<Option target="ludo"/>
+		</Unit>
+		<Unit filename="/mnt/d/FRIcka/5. Semester/Principy Operacnych Systemov/semestralka/sem_praca_POS/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

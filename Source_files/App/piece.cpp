@@ -9,6 +9,7 @@ Piece::Piece(int pIdPlayer, int pStartFieldPosition, int pNumberOfPiece) {
     numberOfPiece = pNumberOfPiece;
     color = COLOR_NUMBER + idPlayer - 1;
 }
+
 Piece::~Piece(){}
 
 int Piece::getIdPlayer() {
